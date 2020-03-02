@@ -1,0 +1,235 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="DAN.yu"><title>python常用模块整理 · 安与星河</title><meta name="description" content="本篇文章整理了学习Python中用模块和填过的坑,希望我整理的内容对大家有所帮助。
+
+
+
+读取excel表格xlsl文件#读取xlsl文件到列表
+import xlrd
+def read_xlsl(filename):    #filename为文件名称
+    excel=xlrd.open_wo"><meta name="keywords" content=""><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><script src="/js/valine.min.js"></script><meta name="generator" content="Hexo 4.2.0"></head><body><span class="donate-address">唯一指定邮箱：i#wrdan.com</span><div id="stage" class="container"><div class="row"><div id="side-bar" class="col-sm-3 col-xs-12 side-container invisible"><div class="vertical-text site-title"><h3 tabindex="-1" class="site-title-small"><a href="/" class="a-title">浊以静之徐清，安以动之徐生</a></h3><h1 tabindex="-1" class="site-title-large"><a href="/" class="a-title">安与星河</a></h1><!--h6(onclick="triggerSiteNav()") Trigger--></div><br class="visible-lg visible-md visible-sm"><div id="site-nav" class="site-title-links"><ul><li><a href="/">首页</a></li><li><a href="/archives">归档</a></li><li><a href="/categories">分类</a></li><li><a href="/tags">标签</a></li><li><a href="/about/index.html">关于</a></li><li><a href="/links/index.html">友链</a></li><li class="soc"><a href="https://github.com/wrdan" target="_blank" rel="noopener noreferrer"><i class="fa fa-github">&nbsp;</i></a><a href="https://twitter.com/dannyw" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter">&nbsp;</i></a><a href="https://wrdan.com/atom.xml" target="_blank" rel="noopener noreferrer"><i class="fa fa-rss">&nbsp;</i></a></li></ul><div class="visible-lg visible-md visible-sm site-nav-footer"><br class="site-nav-footer-br"><footer><p>&copy;&nbsp;2020&nbsp;<a target="_blank" href="https://wrdan.com" rel="noopener noreferrer">DAN.yu</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div><div id="main-container" class="col-sm-9 col-xs-12 main-container invisible"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post-container"><p class="post-title"><a>python常用模块整理</a></p><p class="post-meta"><span class="date meta-item">发布于&nbsp;2018-04-22</span><span class="meta-item"><i class="fa fa-folder"></i><span>&nbsp;</span><a href="/categories/python/" title="python" class="a-tag">python</a><span>&nbsp;</span></span></p><p class="post-abstract"><p>本篇文章整理了学习Python中用模块和填过的坑,希望我整理的内容对大家有所帮助。</p>
+<a id="more"></a>
+
+
+<h2 id="读取excel表格xlsl文件"><a href="#读取excel表格xlsl文件" class="headerlink" title="读取excel表格xlsl文件"></a>读取excel表格xlsl文件</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#读取xlsl文件到列表</span>
+<span class="token keyword">import</span> xlrd
+<span class="token keyword">def</span> <span class="token function">read_xlsl</span><span class="token punctuation">(</span>filename<span class="token punctuation">)</span><span class="token punctuation">:</span>    <span class="token comment" spellcheck="true">#filename为文件名称</span>
+    excel<span class="token operator">=</span>xlrd<span class="token punctuation">.</span>open_workbook<span class="token punctuation">(</span><span class="token string">'{0}'</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>filename<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 获取第一个sheet</span>
+    table <span class="token operator">=</span> excel<span class="token punctuation">.</span>sheets<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>   <span class="token comment" spellcheck="true"># 这儿的0为excel文件中sheet的索引（第1个）</span>
+    <span class="token comment" spellcheck="true"># 打印第i行数据</span>
+    <span class="token comment" spellcheck="true"># print(sheet.row_values(i))</span>
+    <span class="token comment" spellcheck="true"># 打印第j列数据</span>
+    <span class="token comment" spellcheck="true"># print(sheet.col_values(j))</span>
+    rows_count<span class="token operator">=</span>table<span class="token punctuation">.</span>nrows    <span class="token comment" spellcheck="true">#行数</span>
+    data_list<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span>rows_count<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># print(table.row_values(i))</span>
+        data_list<span class="token punctuation">.</span>append<span class="token punctuation">(</span>table<span class="token punctuation">.</span>row_values<span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># print(data_list[0])</span>
+    <span class="token keyword">return</span> data_list<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>或者读取到生成器之中</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#读取xlsl文件到列表</span>
+<span class="token keyword">import</span> xlrd
+<span class="token keyword">def</span> <span class="token function">read_xlsl</span><span class="token punctuation">(</span>filename<span class="token punctuation">)</span><span class="token punctuation">:</span>    <span class="token comment" spellcheck="true">#filename为文件名称</span>
+    excel<span class="token operator">=</span>xlrd<span class="token punctuation">.</span>open_workbook<span class="token punctuation">(</span><span class="token string">'{0}'</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>filename<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 获取第一个sheet</span>
+    table <span class="token operator">=</span> excel<span class="token punctuation">.</span>sheets<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>   <span class="token comment" spellcheck="true"># 这儿的0为excel文件中sheet的索引（第1个）</span>
+    rows_count<span class="token operator">=</span>table<span class="token punctuation">.</span>nrows    <span class="token comment" spellcheck="true">#行数</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span>rows_count<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">yield</span> table<span class="token punctuation">.</span>row_values<span class="token punctuation">(</span>i<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="读取csv文件"><a href="#读取csv文件" class="headerlink" title="读取csv文件"></a>读取csv文件</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 读取csv文件到列表之中</span>
+<span class="token keyword">import</span> csv
+<span class="token keyword">def</span> <span class="token function">read_csv</span><span class="token punctuation">(</span>file_name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">with</span> open<span class="token punctuation">(</span>file_name<span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+        csv_reader <span class="token operator">=</span> csv<span class="token punctuation">.</span>reader<span class="token punctuation">(</span>f<span class="token punctuation">)</span>
+        data_list <span class="token operator">=</span> <span class="token punctuation">[</span>a_line <span class="token keyword">for</span> a_line <span class="token keyword">in</span> csv_reader<span class="token punctuation">]</span>
+    <span class="token keyword">return</span> data_list<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>或者读取csv文件到生成器之中</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#读取csv文件到生成器之中</span>
+<span class="token keyword">def</span> <span class="token function">read_csv</span><span class="token punctuation">(</span>file_name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">with</span> open<span class="token punctuation">(</span>file_name<span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+        csv_reader <span class="token operator">=</span> csv<span class="token punctuation">.</span>reader<span class="token punctuation">(</span>f<span class="token punctuation">)</span>
+        <span class="token keyword">for</span> a_line <span class="token keyword">in</span> csv_reader<span class="token punctuation">:</span>
+            <span class="token keyword">yield</span> a_line<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="将列表集写入到csv文件"><a href="#将列表集写入到csv文件" class="headerlink" title="将列表集写入到csv文件"></a>将列表集写入到csv文件</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#写入到csv文件</span>
+<span class="token keyword">import</span> csv<span class="token punctuation">,</span>datetime
+<span class="token comment" spellcheck="true"># 写入到csv 文件的函数</span>
+<span class="token keyword">def</span> <span class="token function">csv_writer_list</span><span class="token punctuation">(</span>key_word<span class="token punctuation">,</span>data_list<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># do_you_really_fuck_know_list = list(set(know_list) &amp; set(data_list))</span>
+    <span class="token comment" spellcheck="true"># print(len(do_you_really_fuck_know_list))</span>
+    <span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">'{0}_{1}.csv'</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>key_word<span class="token punctuation">,</span>datetime<span class="token punctuation">.</span>datetime<span class="token punctuation">.</span>now<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>strftime<span class="token punctuation">(</span><span class="token string">"%Y_%m_%d_%H_%M_%S"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>\
+                                     <span class="token string">'w'</span><span class="token punctuation">,</span> newline<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">,</span>encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+        writer <span class="token operator">=</span> csv<span class="token punctuation">.</span>writer<span class="token punctuation">(</span>f<span class="token punctuation">)</span>
+        <span class="token keyword">for</span> a_line <span class="token keyword">in</span> data_list<span class="token punctuation">:</span>
+            writer<span class="token punctuation">.</span>writerow<span class="token punctuation">(</span>a_line<span class="token punctuation">)</span>    <span class="token comment" spellcheck="true"># a_line 为一个列表</span>
+```python
+
+示例：
+```python
+<span class="token comment" spellcheck="true"># 一个简单的小栗子</span>
+data_list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+csv_writer_list<span class="token punctuation">(</span><span class="token string">'数字示例'</span><span class="token punctuation">,</span>data_list<span class="token punctuation">)</span>
+```python
+
+<span class="token comment" spellcheck="true">## 判断一个字符串中是否包含中文字符</span>
+
+```python
+<span class="token comment" spellcheck="true"># 是否包含中文字符 是：True ； 否：False</span>
+<span class="token keyword">import</span> re
+zhPattern <span class="token operator">=</span> re<span class="token punctuation">.</span>compile<span class="token punctuation">(</span>u<span class="token string">'[\u4e00-\u9fa5]+'</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">has_chinese</span><span class="token punctuation">(</span>a_string<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> zhPattern<span class="token punctuation">.</span>search<span class="token punctuation">(</span>a_string<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token boolean">True</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token boolean">False</span>
+```python
+
+<span class="token comment" spellcheck="true">##  几天之前或后的日期（比如三天之前是几年几月几号）</span>
+
+```python
+<span class="token comment" spellcheck="true"># 返回几天前或后的日期</span>
+<span class="token keyword">import</span> datetime
+<span class="token keyword">def</span> <span class="token function">the_start_date</span><span class="token punctuation">(</span>days_to_reduce <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">,</span> ago <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
+    :参数 days_to_reduce: 天数
+    :参数 ago: True代表几天前的日期，False代表几天后的日期
+    :返回: 格式类似于：‘2017-05-30’的字符串
+    '''</span>
+    today_time <span class="token operator">=</span> datetime<span class="token punctuation">.</span>date<span class="token punctuation">.</span>today<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">#.strftime("%Y-%m-%d") # 今天的日期</span>
+    dec_days_to_date <span class="token operator">=</span> datetime<span class="token punctuation">.</span>timedelta<span class="token punctuation">(</span>days<span class="token operator">=</span>days_to_reduce<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> ago<span class="token punctuation">:</span>
+        start_day <span class="token operator">=</span> today_time <span class="token operator">-</span> dec_days_to_date
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        start_day <span class="token operator">=</span> today_time <span class="token operator">+</span> dec_days_to_date
+    <span class="token keyword">return</span> start_day
+```python
+小栗子：
+```python
+<span class="token keyword">print</span><span class="token punctuation">(</span>the_start_date<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span>    <span class="token comment" spellcheck="true">#3天前的年月日</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>the_start_date<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">#3天后的年月日</span>
+```python
+
+<span class="token comment" spellcheck="true">## mysql 字符串转化为日期的两个函数：date_format() 与 str_to_date()</span>
+
+<span class="token comment" spellcheck="true">## python字典排序</span>
+```python
+<span class="token comment" spellcheck="true"># 字典排序 （返回值为排列后的列表）</span>
+tuple_list <span class="token operator">=</span> sorted<span class="token punctuation">(</span>a_dic<span class="token punctuation">.</span>items<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> key <span class="token operator">=</span> <span class="token keyword">lambda</span> x<span class="token punctuation">:</span>x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> reverse<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 字典按照值排序 并翻转</span>
+```python
+
+<span class="token comment" spellcheck="true">## BeautifulSoup中，调用tag的 find_all() 方法时,Beautiful Soup会检索当前tag的所有子孙节点,如果只想搜索tag的直接子节点,可以使用参数 recursive=False ；find_next()用于找到下一个标签，用法：当前soup元素.find_next(‘a’)    # 找到当前标签下一个a元素</span>
+
+
+
+<span class="token comment" spellcheck="true">## datetime时间与字符串之间相互转化</span>
+
+```python
+<span class="token comment" spellcheck="true"># datetime类型与字符串相互转化</span>
+<span class="token keyword">import</span> datetime<span class="token punctuation">,</span>time
+
+<span class="token comment" spellcheck="true"># 1：datetime -> string</span>
+datetime<span class="token punctuation">.</span>datetime<span class="token punctuation">.</span>now<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>strftime<span class="token punctuation">(</span><span class="token string">"%Y-%m-%d %H:%M:%S"</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 2：string -> datetime</span>
+<span class="token comment" spellcheck="true"># 字符串格式或者日期不对 会报错</span>
+datetime<span class="token punctuation">.</span>datetime<span class="token punctuation">.</span>strptime<span class="token punctuation">(</span><span class="token string">"2017-5-30 18:20:10"</span><span class="token punctuation">,</span> <span class="token string">"%Y-%m-%d %H:%M:%S"</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 3： 获取当前的时间</span>
+time<span class="token punctuation">.</span>strftime<span class="token punctuation">(</span> <span class="token string">'%Y-%m-%d %X'</span><span class="token punctuation">,</span> time<span class="token punctuation">.</span>localtime<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+```python
+
+<span class="token comment" spellcheck="true">## mysql  instr()和 find_in_set()的用法</span>
+
+```mysql
+select <span class="token operator">*</span> <span class="token keyword">from</span> 表名称 where instr<span class="token punctuation">(</span>列名称<span class="token punctuation">,</span><span class="token string">'教育'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+select <span class="token operator">*</span> <span class="token keyword">from</span> 表名称 where find_in_set<span class="token punctuation">(</span><span class="token string">'教育'</span><span class="token punctuation">,</span>列名称<span class="token punctuation">)</span> <span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="判断目录是否存在，如果不存在，新建一个"><a href="#判断目录是否存在，如果不存在，新建一个" class="headerlink" title="判断目录是否存在，如果不存在，新建一个"></a>判断目录是否存在，如果不存在，新建一个</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 判断目录是否存在，如果不存在，新建一个</span>
+<span class="token keyword">import</span> os
+<span class="token keyword">def</span> <span class="token function">is_folder_exist</span><span class="token punctuation">(</span>folder_path<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># folder_path = os.path.join(os.getcwd(),文件夹名称)</span>
+    <span class="token comment" spellcheck="true"># os.getcwd() 可以获得当前路径</span>
+    <span class="token keyword">if</span> <span class="token operator">not</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>exists<span class="token punctuation">(</span>folder_path<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        os<span class="token punctuation">.</span>makedirs<span class="token punctuation">(</span>folder_path<span class="token punctuation">)</span>
+```python
+
+<span class="token comment" spellcheck="true">## 从网络下载图片的模块</span>
+
+```python
+<span class="token keyword">import</span> os<span class="token punctuation">,</span>requests
+<span class="token comment" spellcheck="true">#下载图片到对应文件夹</span>
+<span class="token keyword">def</span> <span class="token function">img_downloader</span><span class="token punctuation">(</span>img_url<span class="token punctuation">,</span>folder_path<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""
+    :参数 img_url: 图片路径
+    :参数 folder_path: 保存在文件夹路径
+    :返回值: 保存的图片的路径
+    """</span>
+    <span class="token keyword">if</span> <span class="token operator">not</span> img_url<span class="token punctuation">:</span>
+        <span class="token keyword">return</span> None
+    img_name<span class="token operator">=</span>img_url<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>
+    <span class="token comment" spellcheck="true">#这地方最好判断目录是否存在 这里就不做判断了</span>
+    filename<span class="token operator">=</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>folder_path<span class="token punctuation">,</span>img_name<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">#声明header，伪装成浏览器</span>
+    headers<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">"user-agent"</span><span class="token punctuation">:</span><span class="token string">"Mozilla/5.0 (windows NT6.1;WOW64 ; rv:42 ) Gecko/20100101 Firefox/42.0"</span><span class="token punctuation">}</span>
+    session_req<span class="token operator">=</span>requests<span class="token punctuation">.</span>session<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">#构造一个兼容cookie的请求</span>
+    image<span class="token operator">=</span>session_req<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token operator">=</span>img_url<span class="token punctuation">,</span>headers<span class="token operator">=</span>headers<span class="token punctuation">,</span>verify<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">#向url发送get请求，获取整个页面,verify=False排除ssl认证</span>
+    <span class="token comment" spellcheck="true"># image=session_req.get(img_url,verify=False)</span>
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        <span class="token keyword">with</span> open<span class="token punctuation">(</span>filename <span class="token punctuation">,</span><span class="token string">"wb"</span><span class="token punctuation">)</span> <span class="token keyword">as</span> img<span class="token punctuation">:</span>
+            <span class="token comment" spellcheck="true"># print(image.content)</span>
+            img<span class="token punctuation">.</span>write<span class="token punctuation">(</span>image<span class="token punctuation">.</span>content<span class="token punctuation">)</span>
+            <span class="token comment" spellcheck="true"># return</span>
+    <span class="token keyword">except</span> IOError<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"IO Error\n"</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span>
+    <span class="token keyword">return</span> filename
+```python
+
+一个小栗子：下载图片到当前路径下
+
+```python
+<span class="token comment" spellcheck="true"># 下载图片到当前路径下</span>
+a <span class="token operator">=</span> img_downloader<span class="token punctuation">(</span><span class="token string">'http://www.ziyoubaba.com/wp-content/uploads/2016/03/house.jpg'</span><span class="token punctuation">,</span>os<span class="token punctuation">.</span>getcwd<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+```python
+
+<span class="token comment" spellcheck="true">##  判断sql数据库表中某列中是否有某个值</span>
+
+```python
+<span class="token comment" spellcheck="true"># 判断sql数据库表中某列中是否有某个值</span>
+<span class="token keyword">def</span> <span class="token function">is_in_db</span><span class="token punctuation">(</span>cur<span class="token punctuation">,</span> table_name<span class="token punctuation">,</span> col_name <span class="token punctuation">,</span> the_value<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    sql <span class="token operator">=</span> <span class="token string">"select count(*) from table_name where col_name= {0}"</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>the_value<span class="token punctuation">)</span>
+    cur<span class="token punctuation">.</span>execute<span class="token punctuation">(</span>sql<span class="token punctuation">)</span>
+    result_raw <span class="token operator">=</span> cur<span class="token punctuation">.</span>fetchone<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    number <span class="token operator">=</span> result_raw<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token keyword">if</span> result_raw <span class="token keyword">else</span> <span class="token number">0</span>
+    <span class="token keyword">if</span> number <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token boolean">False</span>    <span class="token comment" spellcheck="true"># 不存在</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token boolean">True</span>    <span class="token comment" spellcheck="true"># 存在</span>
+```python
+
+
+<span class="token comment" spellcheck="true">##  sql语句中去除 None</span>
+
+```python
+<span class="token comment" spellcheck="true"># 不重要（请不要看这一条）</span>
+sql <span class="token operator">=</span> sql<span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">"'None'"</span><span class="token punctuation">,</span> <span class="token string">'null'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">'None'</span><span class="token punctuation">,</span> <span class="token string">'null'</span><span class="token punctuation">)</span>
+```python
+
+<span class="token comment" spellcheck="true">## 数据库查询重复</span>
+
+```MySQL
+select id<span class="token punctuation">,</span>count<span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> total <span class="token keyword">from</span> 表 group by 字段 having total<span class="token operator">></span><span class="token number">1</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="可以获取本机的ip地址的网站"><a href="#可以获取本机的ip地址的网站" class="headerlink" title="可以获取本机的ip地址的网站"></a>可以获取本机的ip地址的网站</h2><p>```python<br>“””<br><a href="http://httpbin.org/ip" target="_blank" rel="noopener">http://httpbin.org/ip</a><br><a href="http://httpbin.org/get" target="_blank" rel="noopener">http://httpbin.org/get</a><br><a href="http://icanhazip.com/" target="_blank" rel="noopener">http://icanhazip.com/</a><br><a href="https://api.ip.sb/jsonip" target="_blank" rel="noopener">https://api.ip.sb/jsonip</a><br><a href="http://ip.chinaz.com/getip.aspx" target="_blank" rel="noopener">http://ip.chinaz.com/getip.aspx</a><br>“””</p>
+<p>```python</p>
+<p>待补充….</p>
+</p></div><div class="pagination"><p class="clearfix"><span class="pre pagbuttons"><a role="navigation" href="/share/tracker-server-list.html" title="【干货】Tracker服务器列表"><i class="fa fa-angle-double-left"></i>&nbsp;上一篇: 【干货】Tracker服务器列表</a></span><span>&nbsp;</span><span class="next pagbuttons"><a role="navigation" href="/share/oneindex-1.html" title="OneIndex 2 0  大版本更新  纯走 OneDrive 流量的网盘前端程序">下一篇: OneIndex 2 0  大版本更新  纯走 OneDrive 流量的网盘前端程序&nbsp;<i class="fa fa-angle-double-right"></i></a></span></p></div><a id="comments"></a><div id="valine-container"></div><script>(function(){
+    if(typeof Valine !== 'undefined'){
+        new Valine({
+            el:'#valine-container',
+            appId: 'SphQyGolSRFHnBWzGGz4XeLE-gzGzoHsz',
+            appKey: 'gMqbeGAx90w5NF4G4R43I0UD',
+            placeholder: '快来评论吧😀',
+            path: window.location.pathname
+        })
+    }
+}())
+</script></div></div></div><div class="visible-xs site-bottom-footer"><footer><p>&copy;&nbsp;2020&nbsp;<a target="_blank" href="https://wrdan.com" rel="noopener noreferrer">DAN.yu</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div></div><script src="/js/jquery-3.1.0.min.js"></script><script src="/js/bootstrap.min.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/google-analytics.js"></script><script src="/js/typography.min.js"></script></body></html>

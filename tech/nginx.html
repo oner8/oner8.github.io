@@ -1,0 +1,98 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="DAN.yu"><title>Nginx设置反向代理内网服务器 · 安与星河</title><meta name="description" content="Nginx 是一个很强大的高性能Web和反向代理服务器，它具有很多非常优越的特性，本次主要解决Nginx反向代理设置问题。假定有一台能正常访问的外网Nginx服务器A和一台内网Nginx服务器B，服务器A能访问到服务器B，而外网用户无法直接访问到服务器B。现在通过服务器A配置Nginx反向代理服务器"><meta name="keywords" content=""><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><script src="/js/valine.min.js"></script><meta name="generator" content="Hexo 4.2.0"></head><body><span class="donate-address">唯一指定邮箱：i#wrdan.com</span><div id="stage" class="container"><div class="row"><div id="side-bar" class="col-sm-3 col-xs-12 side-container invisible"><div class="vertical-text site-title"><h3 tabindex="-1" class="site-title-small"><a href="/" class="a-title">浊以静之徐清，安以动之徐生</a></h3><h1 tabindex="-1" class="site-title-large"><a href="/" class="a-title">安与星河</a></h1><!--h6(onclick="triggerSiteNav()") Trigger--></div><br class="visible-lg visible-md visible-sm"><div id="site-nav" class="site-title-links"><ul><li><a href="/">首页</a></li><li><a href="/archives">归档</a></li><li><a href="/categories">分类</a></li><li><a href="/tags">标签</a></li><li><a href="/about/index.html">关于</a></li><li><a href="/links/index.html">友链</a></li><li class="soc"><a href="https://github.com/wrdan" target="_blank" rel="noopener noreferrer"><i class="fa fa-github">&nbsp;</i></a><a href="https://twitter.com/dannyw" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter">&nbsp;</i></a><a href="https://wrdan.com/atom.xml" target="_blank" rel="noopener noreferrer"><i class="fa fa-rss">&nbsp;</i></a></li></ul><div class="visible-lg visible-md visible-sm site-nav-footer"><br class="site-nav-footer-br"><footer><p>&copy;&nbsp;2020&nbsp;<a target="_blank" href="https://wrdan.com" rel="noopener noreferrer">DAN.yu</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div><div id="main-container" class="col-sm-9 col-xs-12 main-container invisible"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post-container"><p class="post-title"><a>Nginx设置反向代理内网服务器</a></p><p class="post-meta"><span class="date meta-item">发布于&nbsp;2017-04-21</span><span class="meta-item"><i class="fa fa-folder"></i><span>&nbsp;</span><a href="/categories/tech/" title="tech" class="a-tag">tech</a><span>&nbsp;</span></span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a href="/tags/Nginx反向代理/" title="Nginx反向代理" class="a-tag">Nginx反向代理</a><span>&nbsp;</span></span></p><p class="post-abstract"><p>Nginx 是一个很强大的高性能Web和反向代理服务器，它具有很多非常优越的特性，本次主要解决Nginx反向代理设置问题。<br>假定有一台能正常访问的外网Nginx服务器A和一台内网Nginx服务器B，服务器A能访问到服务器B，而外网用户无法直接访问到服务器B。现在通过服务器A配置Nginx反向代理服务器B从而实现外网用户访问到内网服务器。<br>配置反向代理</p>
+<p>1.将域名test.wrdan.com解析到服务器A</p>
+<p>2.在服务器A添加一个虚拟主机</p>
+<pre><code>server {
+    listen 80;
+    server_name test.wrdan.com;
+    index index.php;
+
+    location / {
+        proxy_redirect off; #关闭重定向
+
+        #后端的Web服务器可以通过X-Forwarded-For获取用户真实IP
+        proxy_set_header Host $host; #将请求头发送到内网服务器
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_pass http://192.168.1.2:80; #设置内网服务器访问地址
+
+        client_max_body_size 100m; #客户端允许上传的最大文件大小
+        client_body_buffer_size 128k; #允许客户端请求的最大单文件字节数
+
+        proxy_connect_timeout 5; #nginx跟后端服务器连接超时时间
+        proxy_read_timeout 60; #连接成功后，后端服务器响应时间
+        proxy_send_timeout 5; #后端服务器发送时间
+
+        proxy_buffer_size 4k; #设置nginx代理服务器保存用户头信息的缓冲区大小
+        proxy_buffers 4 32k; #proxy_buffers缓冲区，网页平均在32k以下的话，这样设置
+        proxy_busy_buffers_size 64k; #高负荷下缓冲大小（proxy_buffers*2）
+        proxy_temp_file_write_size 64k; #设定缓存文件夹大小，大于这个值，将从upstream服务器传递请求，而不缓冲到磁盘
+        proxy_ignore_client_abort on; #不允许代理端主动关闭连接
+    }
+
+    access_log off; #关闭日志
+}</code></pre><p>3.确保服务器B在内网能用域名test.wrdan.com正常访问。</p>
+<p>4.如果需要打开日志，在服务器B上这么设置</p>
+<pre><code>log_format access &#39;$http_x_real_ip - $remote_user [$time_local] &quot;$request&quot; &#39;
+                      &#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;
+                      &#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;
+
+access_log /var/log/nginx/access.log access;</code></pre><p>默认的日志设置是这样的：</p>
+<pre><code>log_format  main  &#39;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#39;
+                      &#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;
+                      &#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;
+
+access_log  /var/log/nginx/access.log  main;</code></pre><p>5.尝试从外网访问。</p>
+<p>Nginx优化设置</p>
+<p>大部分设置项来自lnmp.org</p>
+<pre><code>http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  &#39;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#39;
+                      &#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;
+                      &#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;
+
+    #access_log  /var/log/nginx/access.log  main;
+    access_log off;
+
+    sendfile        on;
+    server_names_hash_bucket_size 128;
+    client_header_buffer_size 32k;
+    large_client_header_buffers 4 32k;
+    client_max_body_size 50m;
+    tcp_nopush on;
+
+    keepalive_timeout  65;
+
+    fastcgi_connect_timeout 300;
+    fastcgi_send_timeout 300;
+    fastcgi_read_timeout 300;
+    fastcgi_buffer_size 64k;
+    fastcgi_buffers 4 64k;
+    fastcgi_busy_buffers_size 128k;
+    fastcgi_temp_file_write_size 256k;
+
+    gzip on;
+    gzip_min_length  1k;
+    gzip_buffers     4 16k;
+    gzip_http_version 1.1;
+    gzip_comp_level 2;
+    gzip_types     text/plain application/javascript application/x-javascript text/javascript text/css application/xml application/xml+rss;
+    gzip_vary on;
+    gzip_proxied   expired no-cache no-store private auth;
+    gzip_disable   &quot;MSIE [1-6]\.&quot;;
+
+    include conf.d/*.conf;
+    include vhost/*.conf;
+}</code></pre></p></div><div class="pagination"><p class="clearfix"><span class="pre pagbuttons"><a role="navigation" href="/share/aliyun-yiyuan.html" title="阿里云抽奖1元体验Linux Windows 虚拟主机一年（系统可随意切换）"><i class="fa fa-angle-double-left"></i>&nbsp;上一篇: 阿里云抽奖1元体验Linux Windows 虚拟主机一年（系统可随意切换）</a></span><span>&nbsp;</span><span class="next pagbuttons"><a role="navigation" href="/share/Symantec-to-Comodo.html" title="Symantec SSL证书免费替换成3年Comodo SSL证书">下一篇: Symantec SSL证书免费替换成3年Comodo SSL证书&nbsp;<i class="fa fa-angle-double-right"></i></a></span></p></div><a id="comments"></a><div id="valine-container"></div><script>(function(){
+    if(typeof Valine !== 'undefined'){
+        new Valine({
+            el:'#valine-container',
+            appId: 'SphQyGolSRFHnBWzGGz4XeLE-gzGzoHsz',
+            appKey: 'gMqbeGAx90w5NF4G4R43I0UD',
+            placeholder: '快来评论吧😀',
+            path: window.location.pathname
+        })
+    }
+}())
+</script></div></div></div><div class="visible-xs site-bottom-footer"><footer><p>&copy;&nbsp;2020&nbsp;<a target="_blank" href="https://wrdan.com" rel="noopener noreferrer">DAN.yu</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div></div><script src="/js/jquery-3.1.0.min.js"></script><script src="/js/bootstrap.min.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/google-analytics.js"></script><script src="/js/typography.min.js"></script></body></html>

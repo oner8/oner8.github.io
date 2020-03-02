@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="DAN.yu"><title>申请Let's Encrypt通配符HTTPS证书 · 安与星河</title><meta name="description" content="Let’s Encrypt 发布的 ACME v2 现已正式支持通配符证书，接下来将为大家介绍怎样申请，Let’s go.
+
+
+
+注: 本教程是在centos 7下操作的，其他Linux系统大同小异。
+2018.03.15 20:48 更新了通过acme.sh方式获取证书的方法，墙裂推荐这种方法
+一"><meta name="keywords" content=""><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><script src="/js/valine.min.js"></script><meta name="generator" content="Hexo 4.2.0"></head><body><span class="donate-address">唯一指定邮箱：i#wrdan.com</span><div id="stage" class="container"><div class="row"><div id="side-bar" class="col-sm-3 col-xs-12 side-container invisible"><div class="vertical-text site-title"><h3 tabindex="-1" class="site-title-small"><a href="/" class="a-title">浊以静之徐清，安以动之徐生</a></h3><h1 tabindex="-1" class="site-title-large"><a href="/" class="a-title">安与星河</a></h1><!--h6(onclick="triggerSiteNav()") Trigger--></div><br class="visible-lg visible-md visible-sm"><div id="site-nav" class="site-title-links"><ul><li><a href="/">首页</a></li><li><a href="/archives">归档</a></li><li><a href="/categories">分类</a></li><li><a href="/tags">标签</a></li><li><a href="/about/index.html">关于</a></li><li><a href="/links/index.html">友链</a></li><li class="soc"><a href="https://github.com/wrdan" target="_blank" rel="noopener noreferrer"><i class="fa fa-github">&nbsp;</i></a><a href="https://twitter.com/dannyw" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter">&nbsp;</i></a><a href="https://wrdan.com/atom.xml" target="_blank" rel="noopener noreferrer"><i class="fa fa-rss">&nbsp;</i></a></li></ul><div class="visible-lg visible-md visible-sm site-nav-footer"><br class="site-nav-footer-br"><footer><p>&copy;&nbsp;2020&nbsp;<a target="_blank" href="https://wrdan.com" rel="noopener noreferrer">DAN.yu</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div><div id="main-container" class="col-sm-9 col-xs-12 main-container invisible"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post-container"><p class="post-title"><a>申请Let's Encrypt通配符HTTPS证书</a></p><p class="post-meta"><span class="date meta-item">发布于&nbsp;2018-06-05</span><span class="meta-item"><i class="fa fa-folder"></i><span>&nbsp;</span><a href="/categories/tech/" title="tech" class="a-tag">tech</a><span>&nbsp;</span></span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a href="/tags/https/" title="https" class="a-tag">https</a><span>&nbsp;</span><a href="/tags/通配符HTTPS证书/" title="通配符HTTPS证书" class="a-tag">通配符HTTPS证书</a><span>&nbsp;</span><a href="/tags/Let-s-Encrypt/" title="Let's Encrypt" class="a-tag">Let's Encrypt</a><span>&nbsp;</span></span></p><p class="post-abstract"><p>Let’s Encrypt 发布的 ACME v2 现已正式支持通配符证书，接下来将为大家介绍怎样申请，Let’s go.</p>
+<a id="more"></a>
+
+
+<p>注: 本教程是在centos 7下操作的，其他Linux系统大同小异。</p>
+<p>2018.03.15 20:48 更新了通过<code>acme.sh</code>方式获取证书的方法，墙裂推荐这种方法</p>
+<h1 id="一、acme-sh的方式"><a href="#一、acme-sh的方式" class="headerlink" title="一、acme.sh的方式"></a>一、<code>acme.sh</code>的方式</h1><h3 id="1-获取acme-sh"><a href="#1-获取acme-sh" class="headerlink" title="1.获取acme.sh"></a>1.获取<code>acme.sh</code></h3><pre><code>curl https://get.acme.sh | sh</code></pre><p>如下所示安装成功</p>
+<p><img src="https://static.oschina.net/uploads/img/201803/15205059_CCQX.png" alt="image"></p>
+<p>注：我在centos 7上遇到问题，安装完后执行<code>acme.sh</code>，提示命令没找到，如果遇到跟我一样的问题，请再执行以下指令：</p>
+<pre><code>source ~/.bashrc</code></pre><h3 id="2-开始获取证书"><a href="#2-开始获取证书" class="headerlink" title="2.开始获取证书"></a>2.开始获取证书</h3><p><code>acme.sh</code>强大之处在于，可以自动配置DNS，不用去域名后台操作解析记录了，我的域名是在阿里注册的，下面给出阿里云解析的例子，其他地方注册的请参考这里自行修改：<a href="https://github.com/Neilpang/acme.sh/wiki/How-to-issue-a-cert" target="_blank" rel="noopener">传送门</a></p>
+<p>请先前往阿里云后台获取<code>App_Key</code>跟<code>App_Secret</code><a href="https://ak-console.aliyun.com/#/accesskey" target="_blank" rel="noopener">传送门</a>，然后执行以下脚本</p>
+<pre><code># 替换成从阿里云后台获取的密钥export Ali_Key=&quot;sdfsdfsdfljlbjkljlkjsdfoiwje&quot;export Ali_Secret=&quot;jlsdflanljkljlfdsaklkjflsa&quot;# 换成自己的域名
+acme.sh --issue --dns dns_ali -d zhuziyu.cn -d *.zhuziyu.cn</code></pre><p>这里是通过线程休眠120秒等待DNS生效的方式，所以至少需要等待两分钟</p>
+<p><img src="https://static.oschina.net/uploads/img/201803/15205848_JoPT.png" alt="image"></p>
+<p>到了这一步大功告成，撒花</p>
+<p><code>acme.sh</code>比<code>certbot</code>的方式更加自动化，省去了手动去域名后台改DNS记录的步骤，而且不用依赖Python，墙裂推荐😄</p>
+<p>第一次成功之后，<code>acme.sh</code>会记录下App_Key跟App_Secret，并且生成一个定时任务，每天凌晨0：00自动检测过期域名并且自动续期。对这种方式有顾虑的，请慎重，不过也可以自行删掉用户级的定时任务，并且清理掉~/.acme.sh文件夹就行</p>
+<h1 id="二、-certbot方式获取证书-不推荐"><a href="#二、-certbot方式获取证书-不推荐" class="headerlink" title="二、 certbot方式获取证书[不推荐]"></a>二、 <code>certbot</code>方式获取证书<code>[不推荐]</code></h1><h3 id="1-获取certbot-auto"><a href="#1-获取certbot-auto" class="headerlink" title="1.获取certbot-auto"></a>1.获取<code>certbot-auto</code></h3><pre><code># 下载wget https://dl.eff.org/certbot-auto
+
+# 设为可执行权限
+chmod a+x certbot-auto</code></pre><h3 id="2-开始申请证书"><a href="#2-开始申请证书" class="headerlink" title="2.开始申请证书"></a>2.开始申请证书</h3><pre><code># 注xxx.com请根据自己的域名自行更改
+./certbot-auto --server https://acme-v02.api.letsencrypt.org/directory -d&quot;*.xxx.com&quot; --manual --preferred-challenges dns-01 certonly</code></pre><p>执行完这一步之后，会下载一些需要的依赖，稍等片刻之后，会提示输入邮箱，随便输入都行【该邮箱用于安全提醒以及续期提醒】</p>
+<p><img src="https://static.oschina.net/uploads/img/201803/14144603_4ezr.png" alt="image"></p>
+<p>注意，申请通配符证书是要经过DNS认证的，按照提示，前往域名后台添加对应的DNS TXT记录。添加之后，不要心急着按回车，先执行<code>dig xxxx.xxx.com txt</code>确认解析记录是否生效，生效之后再回去按回车确认</p>
+<p><img src="https://static.oschina.net/uploads/img/201803/14144824_vKdF.png" alt="image"></p>
+<p>到了这一步后，大功告成！！！<br>证书存放在/etc/letsencrypt/live/xxx.com/里面</p>
+<p>要续期的话，执行<code>certbot-auto renew</code>就可以了</p>
+<p><img src="https://static.oschina.net/uploads/img/201803/14144952_1Soy.png" alt="image"></p>
+<p>注：经评论区 ddatsh 的指点，这样的证书无法应用到主域名<code>xxx.com</code>上，如需把主域名也增加到证书的覆盖范围，请在开始申请证书步骤的那个指令把主域名也加上，如下：<br>需要注意的是，这样的话需要修改两次解析记录</p>
+<pre><code>./certbot-auto --server https://acme-v02.api.letsencrypt.org/directory -d&quot;*.xxx.com&quot;-d&quot;xxx.com&quot; --manual --preferred-challenges dns-01 certonly</code></pre><p><img src="https://static.oschina.net/uploads/img/201803/15095409_uiHL.png" alt="image"></p>
+<p>下面是一个nginx应用该证书的一个例子</p>
+<pre class="line-numbers language-python"><code class="language-python">server <span class="token punctuation">{</span>
+    server_name xxx<span class="token punctuation">.</span>com<span class="token punctuation">;</span>
+    listen <span class="token number">443</span> http2 ssl<span class="token punctuation">;</span>
+    ssl on<span class="token punctuation">;</span>
+    ssl_certificate <span class="token operator">/</span>etc<span class="token operator">/</span>cert<span class="token operator">/</span>xxx<span class="token punctuation">.</span>cn<span class="token operator">/</span>fullchain<span class="token punctuation">.</span>pem<span class="token punctuation">;</span>
+    ssl_certificate_key <span class="token operator">/</span>etc<span class="token operator">/</span>cert<span class="token operator">/</span>xxx<span class="token punctuation">.</span>cn<span class="token operator">/</span>privkey<span class="token punctuation">.</span>pem<span class="token punctuation">;</span>
+    ssl_trusted_certificate  <span class="token operator">/</span>etc<span class="token operator">/</span>cert<span class="token operator">/</span>xxx<span class="token punctuation">.</span>cn<span class="token operator">/</span>chain<span class="token punctuation">.</span>pem<span class="token punctuation">;</span>
+
+    location <span class="token operator">/</span> <span class="token punctuation">{</span>
+      proxy_pass http<span class="token punctuation">:</span><span class="token operator">//</span><span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token punctuation">:</span><span class="token number">6666</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</p></div><div class="pagination"><p class="clearfix"><span class="pre pagbuttons"><a role="navigation" href="/share/2018-FIFA-World-Cup-Russia.html" title="世界杯来临 推荐一个高清网络直播"><i class="fa fa-angle-double-left"></i>&nbsp;上一篇: 世界杯来临 推荐一个高清网络直播</a></span><span>&nbsp;</span><span class="next pagbuttons"><a role="navigation" href="/share/tracker-server-list.html" title="【干货】Tracker服务器列表">下一篇: 【干货】Tracker服务器列表&nbsp;<i class="fa fa-angle-double-right"></i></a></span></p></div><a id="comments"></a><div id="valine-container"></div><script>(function(){
+    if(typeof Valine !== 'undefined'){
+        new Valine({
+            el:'#valine-container',
+            appId: 'SphQyGolSRFHnBWzGGz4XeLE-gzGzoHsz',
+            appKey: 'gMqbeGAx90w5NF4G4R43I0UD',
+            placeholder: '快来评论吧😀',
+            path: window.location.pathname
+        })
+    }
+}())
+</script></div></div></div><div class="visible-xs site-bottom-footer"><footer><p>&copy;&nbsp;2020&nbsp;<a target="_blank" href="https://wrdan.com" rel="noopener noreferrer">DAN.yu</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div></div><script src="/js/jquery-3.1.0.min.js"></script><script src="/js/bootstrap.min.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/google-analytics.js"></script><script src="/js/typography.min.js"></script></body></html>

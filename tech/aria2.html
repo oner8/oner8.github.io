@@ -1,0 +1,152 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="DAN.yu"><title>CentOS安装 aria2   yaaw 实现离线下载 · 安与星河</title><meta name="description" content="最近购入了vultr 2.5刀 VPS，只架了个网盘程序，感觉还是没有把VPS充分利用起来，就是就使用aria2 + yaaw来实现离线下载。
+
+
+安装aria2aria2是一个轻量级的多协议和多源命令行下载工具。支持HTTP/ HTTPS，FTP，SFTP， BitTorrent和Metalink"><meta name="keywords" content=""><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><script src="/js/valine.min.js"></script><meta name="generator" content="Hexo 4.2.0"></head><body><span class="donate-address">唯一指定邮箱：i#wrdan.com</span><div id="stage" class="container"><div class="row"><div id="side-bar" class="col-sm-3 col-xs-12 side-container invisible"><div class="vertical-text site-title"><h3 tabindex="-1" class="site-title-small"><a href="/" class="a-title">浊以静之徐清，安以动之徐生</a></h3><h1 tabindex="-1" class="site-title-large"><a href="/" class="a-title">安与星河</a></h1><!--h6(onclick="triggerSiteNav()") Trigger--></div><br class="visible-lg visible-md visible-sm"><div id="site-nav" class="site-title-links"><ul><li><a href="/">首页</a></li><li><a href="/archives">归档</a></li><li><a href="/categories">分类</a></li><li><a href="/tags">标签</a></li><li><a href="/about/index.html">关于</a></li><li><a href="/links/index.html">友链</a></li><li class="soc"><a href="https://github.com/wrdan" target="_blank" rel="noopener noreferrer"><i class="fa fa-github">&nbsp;</i></a><a href="https://twitter.com/dannyw" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter">&nbsp;</i></a><a href="https://wrdan.com/atom.xml" target="_blank" rel="noopener noreferrer"><i class="fa fa-rss">&nbsp;</i></a></li></ul><div class="visible-lg visible-md visible-sm site-nav-footer"><br class="site-nav-footer-br"><footer><p>&copy;&nbsp;2020&nbsp;<a target="_blank" href="https://wrdan.com" rel="noopener noreferrer">DAN.yu</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div><div id="main-container" class="col-sm-9 col-xs-12 main-container invisible"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post-container"><p class="post-title"><a>CentOS安装 aria2   yaaw 实现离线下载</a></p><p class="post-meta"><span class="date meta-item">发布于&nbsp;2017-08-14</span><span class="meta-item"><i class="fa fa-folder"></i><span>&nbsp;</span><a href="/categories/tech/" title="tech" class="a-tag">tech</a><span>&nbsp;</span></span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a href="/tags/aria2/" title="aria2" class="a-tag">aria2</a><span>&nbsp;</span><a href="/tags/yaaw/" title="yaaw" class="a-tag">yaaw</a><span>&nbsp;</span><a href="/tags/离线下载/" title="离线下载" class="a-tag">离线下载</a><span>&nbsp;</span></span></p><p class="post-abstract"><p>最近购入了vultr 2.5刀 VPS，只架了个网盘程序，感觉还是没有把VPS充分利用起来，就是就使用aria2 + yaaw来实现离线下载。</p>
+<a id="more"></a>
+<p><img src="https://tva1.sinaimg.cn/large/6bdf06f1ly1fij5vokswrj20dw07175b.jpg" alt=""></p>
+<h3 id="安装aria2"><a href="#安装aria2" class="headerlink" title="安装aria2"></a>安装aria2</h3><p>aria2是一个轻量级的多协议和多源命令行下载工具。支持HTTP/ HTTPS，FTP，SFTP， BitTorrent和Metalink。aria2可以通过内置的 JSON-RPC和XML-RPC接口进行操作。</p>
+<p>CentOS内置软件源并未包含aria2，需要先安装epel，再安装aria2，执行下面的命令即可</p>
+<pre><code>#安装epel源
+yum -y install epel-release
+#安装aria2
+yum -y install aria2
+#查看aria2版本
+aria2c -v</code></pre><p>安装完毕后已经可以使用aria2多线程下载了，常用参数如下：</p>
+<pre><code>-o:下载并重命名
+-x:需要使用的线程数，后面跟数字，线程数越多速度越快(最多16)
+-c:断点续传
+#使用16线程下载一个文件
+aria2c -x 16 https://soft.wrdan.com/windows/ChromeStandaloneSetup.exe</code></pre><h3 id="配置aria2"><a href="#配置aria2" class="headerlink" title="配置aria2"></a>配置aria2</h3><p>aria2配置比较多，如果我们想通过WEB界面的方式离线下载需要开启 JSON-RPC 支持，将下面的规则适当修改并另存为<code>/home/soft/aria2/aria2.conf</code></p>
+<pre><code>#创建下载目录
+mkdir -p /home/download
+#创建文件夹
+mkdir -p /home/soft/aria2
+#创建session文件
+touch /home/soft/aria2/aria2.session
+#将下面的文件另存为aria2.conf
+vi /home/soft/aria2/aria2.conf</code></pre><pre><code># 文件的保存路径(可使用绝对路径或相对路径), 默认: 当前启动位置
+dir=/home/download
+# 启用磁盘缓存, 0为禁用缓存, 需1.16以上版本, 默认:16M
+#disk-cache=32M
+# 文件预分配方式, 能有效降低磁盘碎片, 默认:prealloc
+# 预分配所需时间: none &lt; falloc ? trunc &lt; prealloc
+# falloc和trunc则需要文件系统和内核支持
+# NTFS建议使用falloc, EXT3/4建议trunc, MAC 下需要注释此项
+file-allocation=trunc
+# 断点续传
+continue=true
+
+## 下载连接相关 ##
+
+# 最大同时下载任务数, 运行时可修改, 默认:5
+max-concurrent-downloads=5
+# 同一服务器连接数, 添加时可指定, 默认:1
+max-connection-per-server=5
+# 最小文件分片大小, 添加时可指定, 取值范围1M -1024M, 默认:20M
+# 假定size=10M, 文件为20MiB 则使用两个来源下载; 文件为15MiB 则使用一个来源下载
+min-split-size=10M
+# 单个任务最大线程数, 添加时可指定, 默认:5
+split=32
+# 整体下载速度限制, 运行时可修改, 默认:0
+#max-overall-download-limit=0
+# 单个任务下载速度限制, 默认:0
+#max-download-limit=0
+# 整体上传速度限制, 运行时可修改, 默认:0
+#max-overall-upload-limit=0
+# 单个任务上传速度限制, 默认:0
+#max-upload-limit=0
+# 禁用IPv6, 默认:false
+disable-ipv6=true
+
+## 进度保存相关 ##
+
+# 从会话文件中读取下载任务
+input-file=/home/soft/aria2/aria2.session
+# 在Aria2退出时保存`错误/未完成`的下载任务到会话文件
+save-session=/home/soft/aria2/aria2.session
+# 定时保存会话, 0为退出时才保存, 需1.16.1以上版本, 默认:0
+#save-session-interval=60
+
+## RPC相关设置 ##
+
+# 启用RPC, 默认:false
+enable-rpc=true
+# 允许所有来源, 默认:false
+rpc-allow-origin-all=true
+# 允许非外部访问, 默认:false
+rpc-listen-all=true
+# 事件轮询方式, 取值:[epoll, kqueue, port, poll, select], 不同系统默认值不同
+#event-poll=select
+# RPC监听端口, 端口被占用时可以修改, 默认:6800
+#rpc-listen-port=6800
+# 设置的RPC授权令牌, v1.18.4新增功能, 取代 --rpc-user 和 --rpc-passwd 选项
+#rpc-secret=
+# 设置的RPC访问用户名, 此选项新版已废弃, 建议改用 --rpc-secret 选项
+#rpc-user=
+# 设置的RPC访问密码, 此选项新版已废弃, 建议改用 --rpc-secret 选项
+#rpc-passwd=
+
+## BT/PT下载相关 ##
+
+# 当下载的是一个种子(以.torrent结尾)时, 自动开始BT任务, 默认:true
+#follow-torrent=true
+# BT监听端口, 当端口被屏蔽时使用, 默认:6881-6999
+listen-port=51413
+# 单个种子最大连接数, 默认:55
+#bt-max-peers=55
+# 打开DHT功能, PT需要禁用, 默认:true
+enable-dht=false
+# 打开IPv6 DHT功能, PT需要禁用
+#enable-dht6=false
+# DHT网络监听端口, 默认:6881-6999
+#dht-listen-port=6881-6999
+# 本地节点查找, PT需要禁用, 默认:false
+#bt-enable-lpd=false
+# 种子交换, PT需要禁用, 默认:true
+enable-peer-exchange=false
+# 每个种子限速, 对少种的PT很有用, 默认:50K
+#bt-request-peer-speed-limit=50K
+# 客户端伪装, PT需要
+peer-id-prefix=-TR2770-
+user-agent=Transmission/2.77
+# 当种子的分享率达到这个数时, 自动停止做种, 0为一直做种, 默认:1.0
+seed-ratio=0
+# 强制保存会话, 即使任务已经完成, 默认:false
+# 较新的版本开启后会在任务完成后依然保留.aria2文件
+#force-save=false
+# BT校验相关, 默认:true
+#bt-hash-check-seed=true
+# 继续之前的BT任务时, 无需再次校验, 默认:false
+bt-seed-unverified=true
+# 保存磁力链接元数据为种子文件(.torrent文件), 默认:false
+bt-save-metadata=true
+</code></pre><p>接着输入下面的命令来让aria2后台运行，如果无法启动注意看报错提示。</p>
+<pre><code>#运行aria2c
+aria2c --conf-path=/home/soft/aria2/aria2.conf
+#如果您需要常驻运行，请修改为
+nohup aria2c --conf-path=/home/soft/aria2/aria2.conf &amp;</code></pre><h3 id="添加验证"><a href="#添加验证" class="headerlink" title="添加验证"></a>添加验证</h3><p>在aria2 1.18.4以上版本中，增加了rpc-secret验证，如果您不希望接口公开，可以将上面的配置中<code>rpc-secret=</code>这一行取消注释，并填写自己的key，这样接口地址格式为<a href="http://token:kye@IP:6800/jsonrpc" target="_blank" rel="noopener">http://token:kye@IP:6800/jsonrpc</a></p>
+<h3 id="安装yaaw"><a href="#安装yaaw" class="headerlink" title="安装yaaw"></a>安装yaaw</h3><p>yaaw是一个为aria2提供WEB界面的管理工具，完全使用HTML + javascript实现，因此不需要任何脚本环境，直接下载到您本地或部署到您的WEB服务中使用。</p>
+<pre><code>#下载yaaw
+wget https://github.com/binux/yaaw/archive/master.zip
+#解压
+unzip master.zip
+#移动
+mv yaaw-master/* ./</code></pre><p>如果不出意外，访问<a href="http://yourdomain.com/index.html就能看到yaaw界面，如下截图。" target="_blank" rel="noopener">http://yourdomain.com/index.html就能看到yaaw界面，如下截图。</a></p>
+<p><a href="https://tva1.sinaimg.cn/large/6bdf06f1ly1fij5wutt7ij20rs09f0t4.jpg" target="_blank" rel="noopener"><img src="https://tva1.sinaimg.cn/large/6bdf06f1ly1fij5wutt7ij20rs09f0t4.jpg" alt=""></a></p>
+<h3 id="设置接口"><a href="#设置接口" class="headerlink" title="设置接口"></a>设置接口</h3><p>点击右上角Settings按钮，填写WEB接口，没有设置密码的情况下接口地址为<code>http://IP:6800/jsonrpc</code>，如果您启用了<code>rpc-secret=</code>，那么接口地址为<code>http://token:kye@IP:6800/jsonrpc</code>，注意防火墙还需要放行6800端口，以免出现无法下载的情况，正式环境中请为aria2设置密码，以免被恶意下载。</p>
+<p><img src="https://tva1.sinaimg.cn/large/6bdf06f1ly1fij5xi1uu1j20ff0dqaaj.jpg" alt=""></p>
+<blockquote>
+<p>此文部分内容参考了：<a href="http://www.senra.me/download-artifact-aria2-create-your-own-offline-download-server/" target="_blank" rel="noopener" title="下载神器——Aria2，打造你自己的离线下载服务器">下载神器——Aria2，打造你自己的离线下载服务器</a></p>
+</blockquote>
+</p></div><div class="pagination"><p class="clearfix"><span class="pre pagbuttons"><a role="navigation" href="/share/08-yingyuan.html" title="08影院自动采集视频v3 2源码破解授权"><i class="fa fa-angle-double-left"></i>&nbsp;上一篇: 08影院自动采集视频v3 2源码破解授权</a></span><span>&nbsp;</span><span class="next pagbuttons"><a role="navigation" href="/tech/img-to-vmdk.html" title="Esxi 安装黑群 IMG转换 VMDK">下一篇: Esxi 安装黑群 IMG转换 VMDK&nbsp;<i class="fa fa-angle-double-right"></i></a></span></p></div><a id="comments"></a><div id="valine-container"></div><script>(function(){
+    if(typeof Valine !== 'undefined'){
+        new Valine({
+            el:'#valine-container',
+            appId: 'SphQyGolSRFHnBWzGGz4XeLE-gzGzoHsz',
+            appKey: 'gMqbeGAx90w5NF4G4R43I0UD',
+            placeholder: '快来评论吧😀',
+            path: window.location.pathname
+        })
+    }
+}())
+</script></div></div></div><div class="visible-xs site-bottom-footer"><footer><p>&copy;&nbsp;2020&nbsp;<a target="_blank" href="https://wrdan.com" rel="noopener noreferrer">DAN.yu</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div></div><script src="/js/jquery-3.1.0.min.js"></script><script src="/js/bootstrap.min.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/google-analytics.js"></script><script src="/js/typography.min.js"></script></body></html>

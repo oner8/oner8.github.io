@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="DAN.yu"><title>新浪微博图床 Chrome 扩展，支持同步到微相册 · 安与星河</title><meta name="description" content="简介上传图片到微博并生成外链的 Chrome 浏览器扩展（最低版本支持：Chrome 56）
+
+
+
+功能介绍
+支持点选、拖拽、粘贴以及页面右键菜单上传图片到微博并同步到微相册
+支持 JPEG、PNG、GIF 三种图片格式
+支持查看上传记录，简单的浏览及删除操作
+支持生成 URL、HTML、UBB、M"><meta name="keywords" content=""><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><script src="/js/valine.min.js"></script><meta name="generator" content="Hexo 4.2.0"></head><body><span class="donate-address">唯一指定邮箱：i#wrdan.com</span><div id="stage" class="container"><div class="row"><div id="side-bar" class="col-sm-3 col-xs-12 side-container invisible"><div class="vertical-text site-title"><h3 tabindex="-1" class="site-title-small"><a href="/" class="a-title">浊以静之徐清，安以动之徐生</a></h3><h1 tabindex="-1" class="site-title-large"><a href="/" class="a-title">安与星河</a></h1><!--h6(onclick="triggerSiteNav()") Trigger--></div><br class="visible-lg visible-md visible-sm"><div id="site-nav" class="site-title-links"><ul><li><a href="/">首页</a></li><li><a href="/archives">归档</a></li><li><a href="/categories">分类</a></li><li><a href="/tags">标签</a></li><li><a href="/about/index.html">关于</a></li><li><a href="/links/index.html">友链</a></li><li class="soc"><a href="https://github.com/wrdan" target="_blank" rel="noopener noreferrer"><i class="fa fa-github">&nbsp;</i></a><a href="https://twitter.com/dannyw" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter">&nbsp;</i></a><a href="https://wrdan.com/atom.xml" target="_blank" rel="noopener noreferrer"><i class="fa fa-rss">&nbsp;</i></a></li></ul><div class="visible-lg visible-md visible-sm site-nav-footer"><br class="site-nav-footer-br"><footer><p>&copy;&nbsp;2020&nbsp;<a target="_blank" href="https://wrdan.com" rel="noopener noreferrer">DAN.yu</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div><div id="main-container" class="col-sm-9 col-xs-12 main-container invisible"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post-container"><p class="post-title"><a>新浪微博图床 Chrome 扩展，支持同步到微相册</a></p><p class="post-meta"><span class="date meta-item">发布于&nbsp;2017-03-28</span><span class="meta-item"><i class="fa fa-folder"></i><span>&nbsp;</span><a href="/categories/share/" title="share" class="a-tag">share</a><span>&nbsp;</span></span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a href="/tags/新浪微博图床/" title="新浪微博图床" class="a-tag">新浪微博图床</a><span>&nbsp;</span><a href="/tags/图床/" title="图床" class="a-tag">图床</a><span>&nbsp;</span><a href="/tags/Chrome-浏览器扩展/" title="Chrome 浏览器扩展" class="a-tag">Chrome 浏览器扩展</a><span>&nbsp;</span></span></p><p class="post-abstract"><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>上传图片到微博并生成外链的 Chrome 浏览器扩展（最低版本支持：Chrome 56）</p>
+<a id="more"></a>
+
+
+<h3 id="功能介绍"><a href="#功能介绍" class="headerlink" title="功能介绍"></a>功能介绍</h3><ul>
+<li>支持点选、拖拽、粘贴以及页面右键菜单上传图片到微博并同步到微相册</li>
+<li>支持 JPEG、PNG、GIF 三种图片格式</li>
+<li>支持查看上传记录，简单的浏览及删除操作</li>
+<li>支持生成 URL、HTML、UBB、Markdown 四种格式</li>
+<li>支持单条、多条模式的复制操作</li>
+<li>支持选择协议（http、https 和相对协议）</li>
+<li>支持三种固定裁剪尺寸和用户自定义尺寸</li>
+</ul>
+<h3 id="操作指南"><a href="#操作指南" class="headerlink" title="操作指南"></a>操作指南</h3><blockquote>
+<p>具体的操作指南，包含图示</p>
+</blockquote>
+<p><img src="https://camo.githubusercontent.com/95bed9573c3f7ef4140dd3be3e2d2e6c33c02ab3/687474703a2f2f7773312e73696e61696d672e636e2f6c617267652f30303647347873666779316664746e337761626f746a33306b6b3031346d78722e6a7067" alt="请输入图片描述"></p>
+<p>弹窗属于单例模式，在同一时间只能打开一个。在弹窗处于最小化的情况下，用户再去点击 icon 按钮会出现上图的闪烁提示，表示弹窗已经处于打开状态。（上图是 Windows 10 的提示，不同的操作系统略有差异）</p>
+<p><img src="https://camo.githubusercontent.com/7bb6d18ac77d8c7f6f359abb3684a2d34991c52a/687474703a2f2f7773342e73696e61696d672e636e2f6c617267652f30303647347873666779316664746e30327373346a6a3330656e3037766a72702e6a7067" alt="请输入图片描述"></p>
+<p>上图展示的是扩展中常用的提示，一般出现在主屏幕的右下角。通常在一定时间后会自动消失，但是有两种提示框需要达到特定条件才会消失。一种是进度条提示，它会在图片上传流程结束自动关闭。另一种是检测到微博没有登录的提示，需要用户按照提示操作或者手动点击关闭。</p>
+<p><img src="https://camo.githubusercontent.com/2bb15c539c4b11f66486534a1d8f7c14d3db699c/687474703a2f2f7778312e73696e61696d672e636e2f6c617267652f3030364734787366677931666474717233306c30706a33306e6930676861616a2e6a7067" alt="请输入图片描述"></p>
+<ol>
+<li>地址协议选择</li>
+<li>图片裁剪选择</li>
+<li>在单条和多条复制模式之间切换的按钮</li>
+<li>上传记录按钮</li>
+<li>选择上传图片的按钮</li>
+<li>复制当前类型的地址，批量模式下会复制此类型的所有地址（批量模式会显示：Copy All）</li>
+<li>粘贴区域。弹窗中所有的虚线类型区域在获得焦点，即变绿色后均可以进行粘贴操作</li>
+<li>拖拽区域（弹窗任何区域都可以使用）</li>
+</ol>
+<p><strong>粘贴区域额外说明：</strong></p>
+<p>因为粘贴图片文件实际上是一种相当受限的操作，所以这里的粘贴操作被稍稍的加强了一下。粘贴区域额外的支持粘贴图片地址，可以对其它图片地址上传到微相册提供极大的便利。微博自身的地址，即域名中包含 .sinaimg.cn 字符串的地址是不支持粘贴上传的，这是为了避免误操作。（用其它方式上传图片没有这种限制）</p>
+<p><img src="https://camo.githubusercontent.com/b82ca4f452b3b5fd5e5a397ce825221d9b58eb5d/687474703a2f2f7773332e73696e61696d672e636e2f6c617267652f30303647347873666779316664746e753471746a396a33306b393063756a726f2e6a7067" alt="请输入图片描述"></p>
+<p>如果可以获取到页面中的图片，则会在右键菜单中显示把这张图片上传到微相册的选项，点击后会自动上传，上传结束后会出现提示。如果上传成功，该图片的地址就自动在剪切板中，可以粘贴使用了。注意：这里的上传操作没有进度提示，最终的结果只有成功和失败。如果在没有结果返回的情况下，用户对另一张图片执行了相同的操作，那么剪切板中会是最后成功上传的图片地址。</p>
+<p><img src="https://camo.githubusercontent.com/7bcf3b21cc71c43616033a838bf8eabb6f3d01c9/687474703a2f2f7778342e73696e61696d672e636e2f6c617267652f303036473478736667793166647538343272346a696a33307a6d31696e6e696d2e6a7067" alt="请输入图片描述"></p>
+<ol>
+<li>从相册中移除这张图片（移除后图片的地址依然可以访问）</li>
+<li>在图片上右击可以复制图片地址（上面的是复制原图地址，下面的是复制当前显示的图片地址）</li>
+<li>图片的创建时间</li>
+<li>上一页按钮（禁用状态）</li>
+<li>下一页按钮（可用状态）</li>
+<li>使用微相册管理这些图片</li>
+<li>捐赠支持一下</li>
+<li>在 GitHub 上提交建议或者 Bug</li>
+<li>在博客中提交建议或者 Bug（如果不方便使用 GitHub） </li>
+<li>使用电子邮件联系我</li>
+<li>当前的页数和总页数</li>
+</ol>
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><blockquote>
+<p>如果你想使用好这个插件，那么理解这些词语很重要</p>
+</blockquote>
+<p>以下是针对弹窗模式的说明：</p>
+<p>当产生上传流程时，进度条会出现。当上传流程结束时，进度条关闭并提示图片上传流程结束。</p>
+<p>弹窗模式最重要的一点是不区分单个文件和多个文件，它们被视为是一样的，那么上传流程如何工作呢？</p>
+<p>当上传流程进行中时，弹窗没有被锁死，这个时候用户依然可以继续添加图片，所有图片上传结束后，这些图片会和前面的图片一同出现的列表中。这对小水管用户传大图、多图非常实用。</p>
+<p>当上传流程结束后，用户选择继续上传图片，在这些图片上传成功时，已存在的列表会被清空，新的图片会被添加到列表中。如果用户误操作清空了列表，可以通过上传记录来获得以前图片的地址。</p>
+<p>微相册命中规则的说明：</p>
+<ul>
+<li>拉取用户的前100个相册</li>
+<li>检测本地存储的相册ID是否在拉取的列表中</li>
+<li>检测拉取相册中是否带有64位特征码的相册</li>
+</ul>
+<p>如果上面的步骤没有查找到指定的相册，并且用户当前的相册总数小于100，那么创建供此插件传图使用的相册（这个相册是属于用户私有，好友不可见的）。</p>
+<p>以上条件都不符合，则不会同步图片。</p>
+<h3 id="附加"><a href="#附加" class="headerlink" title="附加"></a>附加</h3><p>已知的自定义裁剪格式：</p>
+<ul>
+<li>large -&gt; 原始图片</li>
+<li>mw690 -&gt; 最大690像素宽度裁剪</li>
+<li>thumbnail -&gt; 缩略图</li>
+<li>small -&gt; 小图</li>
+<li>square -&gt; 80像素正方形裁剪</li>
+<li>thumb150 -&gt; 150像素正方形裁剪</li>
+<li>thumb180 -&gt; 180像素正方形裁剪</li>
+<li>thumb300 -&gt; 300像素正方形裁剪</li>
+<li>orj180 -&gt; 180像素宽度原比例缩放</li>
+<li>orj360 -&gt; 360像素宽度原比例缩放</li>
+<li>crop.x.y.x1.y1.w -&gt; 自定义矩形裁剪，其中 x, y 表示左上角坐标，x1, y1 表示右下角坐标，w 是宽度</li>
+</ul>
+<h3 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h3><ul>
+<li>图片上传到哪儿了？<ul>
+<li>上传到微博上了</li>
+</ul>
+</li>
+<li>如何管理已上传的图片？<ul>
+<li>上传记录或者微相册均可以管理</li>
+</ul>
+</li>
+<li>如何删除已上传的图片？<ul>
+<li>目前无法删除，微相册中的删除是针对相册的操作，对图片本身没有影响</li>
+</ul>
+</li>
+<li>JPG 和 JPEG 有什么区别？<ul>
+<li>JPEG 是图片格式，JPG 是 JPEG 图片格式常用的一种文件扩展名</li>
+</ul>
+</li>
+<li>粘贴上传没有效果？<ul>
+<li>粘贴上传只支持复制图片文件，在资源文件管理器中的复制文件并粘贴是没有效果的</li>
+</ul>
+</li>
+<li>上传的是 PNG 图片，返回的却是 JPG 后缀的地址？<ul>
+<li>微博不支持 PNG 后缀，后缀对于浏览器判断图片的格式是没有影响的</li>
+</ul>
+</li>
+<li>如何使用自定义裁剪？<ul>
+<li>自定义裁剪的格式需要微博支持，否则生成的地址是不能正常问的</li>
+</ul>
+</li>
+<li>裁剪操作对图片的影响？<ul>
+<li>裁剪适用于 JPEG 格式的图片。PNG 图片裁剪后会丢失透明通道，GIF 则会变成静态图片</li>
+</ul>
+</li>
+<li>删除一张图片且页面刷新后，页面上的图片数量少了一个？<ul>
+<li>属于正常情况，服务器返回的数据时效性不足，脚本做了些弥补，因此会出现这种情况</li>
+</ul>
+</li>
+</ul>
+<h3 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h3><p><a href="https://chrome.google.com/webstore/detail/pinjkilghdfhnkibhcangnpmcpdpmehk" target="_blank" rel="noopener">Chrome 商店下载</a></p>
+<p><a href="https://github.com/Aqours/Weibo-Picture-Store" target="_blank" rel="noopener">GitHub 查看源码</a></p>
+</p></div><div class="pagination"><p class="clearfix"><span class="pre pagbuttons"><a role="navigation" href="/tech/nginx-h5ai-passwd.html" title="Nginx 开启用户密码登录访问 配合h5ai使用更佳"><i class="fa fa-angle-double-left"></i>&nbsp;上一篇: Nginx 开启用户密码登录访问 配合h5ai使用更佳</a></span><span>&nbsp;</span><span class="next pagbuttons"><a role="navigation" href="/share/WordPress-Theme-KRATOS.html" title="WordPress 主题 KRATOS 推荐">下一篇: WordPress 主题 KRATOS 推荐&nbsp;<i class="fa fa-angle-double-right"></i></a></span></p></div><a id="comments"></a><div id="valine-container"></div><script>(function(){
+    if(typeof Valine !== 'undefined'){
+        new Valine({
+            el:'#valine-container',
+            appId: 'SphQyGolSRFHnBWzGGz4XeLE-gzGzoHsz',
+            appKey: 'gMqbeGAx90w5NF4G4R43I0UD',
+            placeholder: '快来评论吧😀',
+            path: window.location.pathname
+        })
+    }
+}())
+</script></div></div></div><div class="visible-xs site-bottom-footer"><footer><p>&copy;&nbsp;2020&nbsp;<a target="_blank" href="https://wrdan.com" rel="noopener noreferrer">DAN.yu</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div></div><script src="/js/jquery-3.1.0.min.js"></script><script src="/js/bootstrap.min.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/google-analytics.js"></script><script src="/js/typography.min.js"></script></body></html>

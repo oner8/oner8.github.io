@@ -1,0 +1,94 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="DAN.yu"><title>Docker Compose  Docker Pan 老司机优化版   全功能文件管理   云盘应用 · 安与星河</title><meta name="description" content="缘由首先得感谢，@Jaeger 几天前发布的帖子： 老司机使用 docker-pan 一键搭建可离线磁力种子的私有云盘,可在线播放预览文件 -&amp;gt; https://www.v2ex.com/t/383801
+
+
+
+谢谢!
+正是受这个帖子的影响。也是因为使用了那个 docker-pan 镜像。让我"><meta name="keywords" content=""><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><script src="/js/valine.min.js"></script><meta name="generator" content="Hexo 4.2.0"></head><body><span class="donate-address">唯一指定邮箱：i#wrdan.com</span><div id="stage" class="container"><div class="row"><div id="side-bar" class="col-sm-3 col-xs-12 side-container invisible"><div class="vertical-text site-title"><h3 tabindex="-1" class="site-title-small"><a href="/" class="a-title">浊以静之徐清，安以动之徐生</a></h3><h1 tabindex="-1" class="site-title-large"><a href="/" class="a-title">安与星河</a></h1><!--h6(onclick="triggerSiteNav()") Trigger--></div><br class="visible-lg visible-md visible-sm"><div id="site-nav" class="site-title-links"><ul><li><a href="/">首页</a></li><li><a href="/archives">归档</a></li><li><a href="/categories">分类</a></li><li><a href="/tags">标签</a></li><li><a href="/about/index.html">关于</a></li><li><a href="/links/index.html">友链</a></li><li class="soc"><a href="https://github.com/wrdan" target="_blank" rel="noopener noreferrer"><i class="fa fa-github">&nbsp;</i></a><a href="https://twitter.com/dannyw" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter">&nbsp;</i></a><a href="https://wrdan.com/atom.xml" target="_blank" rel="noopener noreferrer"><i class="fa fa-rss">&nbsp;</i></a></li></ul><div class="visible-lg visible-md visible-sm site-nav-footer"><br class="site-nav-footer-br"><footer><p>&copy;&nbsp;2020&nbsp;<a target="_blank" href="https://wrdan.com" rel="noopener noreferrer">DAN.yu</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div><div id="main-container" class="col-sm-9 col-xs-12 main-container invisible"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post-container"><p class="post-title"><a>Docker Compose  Docker Pan 老司机优化版   全功能文件管理   云盘应用</a></p><p class="post-meta"><span class="date meta-item">发布于&nbsp;2017-08-26</span><span class="meta-item"><i class="fa fa-folder"></i><span>&nbsp;</span><a href="/categories/tech/" title="tech" class="a-tag">tech</a><span>&nbsp;</span></span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a href="/tags/docker-pan老司机优化版/" title="docker-pan老司机优化版" class="a-tag">docker-pan老司机优化版</a><span>&nbsp;</span><a href="/tags/在线下载/" title="在线下载" class="a-tag">在线下载</a><span>&nbsp;</span><a href="/tags/BT磁链/" title="BT磁链" class="a-tag">BT磁链</a><span>&nbsp;</span></span></p><p class="post-abstract"><h2 id="缘由"><a href="#缘由" class="headerlink" title="缘由"></a>缘由</h2><p>首先得感谢，@Jaeger 几天前发布的帖子： 老司机使用 docker-pan 一键搭建可离线磁力种子的私有云盘,可在线播放预览文件 -&gt; <a href="https://www.v2ex.com/t/383801" target="_blank" rel="noopener">https://www.v2ex.com/t/383801</a></p>
+<a id="more"></a>
+
+
+<p>谢谢!</p>
+<p>正是受这个帖子的影响。也是因为使用了那个 docker-pan 镜像。让我觉得我很需要这个功能，而且这个镜像本身稳定性方面也有一些可以提升的空间。于是才有了这里的东西。</p>
+<p>我主要是使用了 docker-compose 来搭建这样一个应用。为什么？</p>
+<ul>
+<li>使用 Docker-compose 让每个 docker 镜像只做一件事，则其本身会更加稳定，不易受其他组件的影响，也更方便管理</li>
+<li>另外一个 Nextcloud 比 filerun 更好用，更稳定，还有各种移动端，桌面端的 client。（在手机上使用也更方便），不需要外置数据库就可以使用（少了一个不稳定因素）。</li>
+</ul>
+<p>代码地址： <a href="https://github.com/wahyd4/aria2-ariang-x-docker-compose" target="_blank" rel="noopener">https://github.com/wahyd4/aria2-ariang-x-docker-compose</a></p>
+<p>同时提供了 Aria2 + AriaNg + filerun 和 Aria2 + AriaNg + Nextcloud 两种方案，供大家选择。</p>
+<h2 id="比较-Filerun-和-Nextcloud"><a href="#比较-Filerun-和-Nextcloud" class="headerlink" title="比较 Filerun 和 Nextcloud"></a>比较 Filerun 和 Nextcloud</h2><p><img src="https://tva1.sinaimg.cn/mw690/49fcaea6gy1fiti1ddddjj20n60b676h.jpg" alt="compare"></p>
+<h2 id="我的推荐"><a href="#我的推荐" class="headerlink" title="我的推荐"></a>我的推荐</h2><pre><code>我更喜欢 Nextcloud。毕竟颜值更高，功能强大还有各种客户端，大家从下面的两种方式中选择一种就好。 </code></pre><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><em>提示</em> 如果你不是在本地安装，请记得替换 localhost 为你的 ip 或者绑定的域名哦！！</p>
+<ul>
+<li><p>安装 Docker CE (社区版)，不要使用 Ubuntu 等操作系统系统自带的安装包来安装，因为他们的版本都很老了。推荐使用<a href="https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/" target="_blank" rel="noopener">官方提供</a>的方式安装</p>
+</li>
+<li><p>安装 Docker Compose <a href="https://docs.docker.com/compose/install/#install-compose" target="_blank" rel="noopener">https://docs.docker.com/compose/install/#install-compose</a></p>
+</li>
+<li><p>使用 Filerun 作为在线文件管理器：</p>
+<pre><code>git clone https://github.com/wahyd4/aria2-ariang-x-docker-compose.git 
+cd aria2-ariang-x-docker-compose/filerun 
+docker-compose up -d </code></pre></li>
+</ul>
+<p>一切搞定，尽情享受吧！ 文件管理 Filerun： <a href="http://localhost:3000" target="_blank" rel="noopener">http://localhost:3000</a></p>
+<p>AriaNg： <a href="http://localhost:8000" target="_blank" rel="noopener">http://localhost:8000</a></p>
+<ul>
+<li><p>使用 nextcloud 安装</p>
+<pre><code>git clone https://github.com/wahyd4/aria2-ariang-x-docker-compose.git 
+cd aria2-ariang-x-docker-compose/nextcloud 
+docker-compose up -d</code></pre></li>
+</ul>
+<p>文件管理 Nextcloud： <a href="http://localhost:3000" target="_blank" rel="noopener">http://localhost:3000</a></p>
+<p>AriaNg： <a href="http://localhost:8000" target="_blank" rel="noopener">http://localhost:8000</a></p>
+<p>Nextcloud 还需额外的一点手动操作，</p>
+<h2 id="Nextcloud-配置-external-storage"><a href="#Nextcloud-配置-external-storage" class="headerlink" title="Nextcloud 配置 external-storage"></a>Nextcloud 配置 external-storage</h2><ul>
+<li><p>打开 <a href="http://ip:3000" target="_blank" rel="noopener">http://ip:3000</a> 使用你喜欢的任意密码进行登录</p>
+</li>
+<li><p>点击右上角 设置 -&gt; 应用</p>
+</li>
+<li><p>启用 External storage support 插件, 并输入密码确认<br><img src="https://raw.githubusercontent.com/wahyd4/aria2-ariang-x-docker-compose/master/images/nextcloud/external-storage.png" alt="plugin"></p>
+</li>
+<li><p>点击右上角 设置 -&gt; 管理 -&gt; 外部存储 进行添加外部存储, Aria2 下载的文件会存在 /user-files/ 目录下，存储类型选择本地存储，当存储添加成功，且可用时，最左端会显示出绿色。<br><img src="https://raw.githubusercontent.com/wahyd4/aria2-ariang-x-docker-compose/master/images/nextcloud/config-storage.png" alt="Add external storage"></p>
+</li>
+<li><p>搞定，现在你通过 AriaNg 下载的文件就可以在 Nextcloud 里面查看到了。</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wahyd4/aria2-ariang-x-docker-compose/master/images/nextcloud/downloads-folder.png" alt="Files"></p>
+<h2 id="如果你仅仅想使用-Aria2-AriaNg"><a href="#如果你仅仅想使用-Aria2-AriaNg" class="headerlink" title="如果你仅仅想使用 Aria2 + AriaNg"></a>如果你仅仅想使用 Aria2 + AriaNg</h2><pre><code>  docker run --rm  -p 8000:80  -p 6800:6800 -v ~/data/:/user-files wahyd4/aria2-ariang </code></pre><p><code>8000</code> 本地则是你暴露出对外访问的 AriaNg 图形界面的端口， <code>~/data/</code> 是你所有通过 Aria2 下载的文件目录。</p>
+<h2 id="如果你在群晖上使用"><a href="#如果你在群晖上使用" class="headerlink" title="如果你在群晖上使用"></a>如果你在群晖上使用</h2><p>先运行 wahyd4/aria2-ariang 容器，再运行 wonderfall/nextcloud 容器，并使用 volume_from 属性即可实现完整功能了。</p>
+<h2 id="附言1"><a href="#附言1" class="headerlink" title="附言1"></a>附言1</h2><p>又去了解了了下，Nextcloud 确实很强大，有很多插件！安装完这些插件 Nextcloud 就是一个工作平台，一个效率工具啊。<br> 比如:</p>
+<ul>
+<li>在线 word 编辑</li>
+<li>markdown 编辑</li>
+<li>Calendar 客户端</li>
+<li>邮件客户端</li>
+<li>视频电话</li>
+<li>通信录</li>
+<li>Kanban</li>
+</ul>
+<p>等等……</p>
+<p>详见： <a href="https://apps.nextcloud.com/categories/files" target="_blank" rel="noopener">https://apps.nextcloud.com/categories/files</a></p>
+<h2 id="附言2"><a href="#附言2" class="headerlink" title="附言2"></a>附言2</h2><p>看到很多人使用v2ex 的收藏，建议大家也可以在 github 上面 ︎ 哦，持续关注，多谢。</p>
+<p><a href="https://github.com/wahyd4/aria2-ariang-x-docker-compose" target="_blank" rel="noopener">https://github.com/wahyd4/aria2-ariang-x-docker-compose</a></p>
+<h2 id="附言3"><a href="#附言3" class="headerlink" title="附言3"></a>附言3</h2><p>有什么新需求的，欢迎到 Github 上给我提 issue 啊，这样才更加方便跟踪和管理</p>
+<p><a href="https://github.com/wahyd4/aria2-ariang-x-docker-compose/issues" target="_blank" rel="noopener">https://github.com/wahyd4/aria2-ariang-x-docker-compose/issues</a></p>
+<h2 id="附言4"><a href="#附言4" class="headerlink" title="附言4"></a>附言4</h2><ul>
+<li>刚刚对镜像进行了升级。新版本中只需要使用一个端口<code>8000</code>。<br>aria2 地址： <a href="http://localhost:8000/aria2" target="_blank" rel="noopener">http://localhost:8000/aria2</a><br>文件管理地址 <a href="http://localhost:8000" target="_blank" rel="noopener">http://localhost:8000</a></li>
+</ul>
+<h3 id="如果你是升级："><a href="#如果你是升级：" class="headerlink" title="如果你是升级："></a>如果你是升级：</h3><p>进入 filerun 或者 nextcloud 目录</p>
+<pre><code>docker-compose stop # 将 docker 镜像暂时关掉 
+git pull origin master # 获取最近代码 
+docker-compose up -d # 运行最新版本的镜像 </code></pre><p>更多具体使用还请到 github 仓库地址。</p>
+<blockquote>
+<p>全文转载自<a href="https://www.v2ex.com/t/385118" target="_blank" rel="noopener">V2EX</a></p>
+</blockquote>
+</p></div><div class="pagination"><p class="clearfix"><span class="pre pagbuttons"><a role="navigation" href="/tech/pic.html" title="Bing 每日一图  amp  随机图片 API"><i class="fa fa-angle-double-left"></i>&nbsp;上一篇: Bing 每日一图  amp  随机图片 API</a></span><span>&nbsp;</span><span class="next pagbuttons"><a role="navigation" href="/share/Alphassl.html" title="最新免费 Alphassl 泛域名 SSL 证书申请方法">下一篇: 最新免费 Alphassl 泛域名 SSL 证书申请方法&nbsp;<i class="fa fa-angle-double-right"></i></a></span></p></div><a id="comments"></a><div id="valine-container"></div><script>(function(){
+    if(typeof Valine !== 'undefined'){
+        new Valine({
+            el:'#valine-container',
+            appId: 'SphQyGolSRFHnBWzGGz4XeLE-gzGzoHsz',
+            appKey: 'gMqbeGAx90w5NF4G4R43I0UD',
+            placeholder: '快来评论吧😀',
+            path: window.location.pathname
+        })
+    }
+}())
+</script></div></div></div><div class="visible-xs site-bottom-footer"><footer><p>&copy;&nbsp;2020&nbsp;<a target="_blank" href="https://wrdan.com" rel="noopener noreferrer">DAN.yu</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div></div><script src="/js/jquery-3.1.0.min.js"></script><script src="/js/bootstrap.min.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/google-analytics.js"></script><script src="/js/typography.min.js"></script></body></html>

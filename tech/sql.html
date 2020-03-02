@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="DAN.yu"><title>SQL 数据库基本语法 · 安与星河</title><meta name="description" content="一、基础
+1、说明：创建数据库
+Create DATABASE database-name2、说明：删除数据库
+drop database dbname3、说明：备份sql server— 创建 备份数据的 device
+USE master
+EXEC sp_addumpdevice &amp;#39;di"><meta name="keywords" content=""><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><script src="/js/valine.min.js"></script><meta name="generator" content="Hexo 4.2.0"></head><body><span class="donate-address">唯一指定邮箱：i#wrdan.com</span><div id="stage" class="container"><div class="row"><div id="side-bar" class="col-sm-3 col-xs-12 side-container invisible"><div class="vertical-text site-title"><h3 tabindex="-1" class="site-title-small"><a href="/" class="a-title">浊以静之徐清，安以动之徐生</a></h3><h1 tabindex="-1" class="site-title-large"><a href="/" class="a-title">安与星河</a></h1><!--h6(onclick="triggerSiteNav()") Trigger--></div><br class="visible-lg visible-md visible-sm"><div id="site-nav" class="site-title-links"><ul><li><a href="/">首页</a></li><li><a href="/archives">归档</a></li><li><a href="/categories">分类</a></li><li><a href="/tags">标签</a></li><li><a href="/about/index.html">关于</a></li><li><a href="/links/index.html">友链</a></li><li class="soc"><a href="https://github.com/wrdan" target="_blank" rel="noopener noreferrer"><i class="fa fa-github">&nbsp;</i></a><a href="https://twitter.com/dannyw" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter">&nbsp;</i></a><a href="https://wrdan.com/atom.xml" target="_blank" rel="noopener noreferrer"><i class="fa fa-rss">&nbsp;</i></a></li></ul><div class="visible-lg visible-md visible-sm site-nav-footer"><br class="site-nav-footer-br"><footer><p>&copy;&nbsp;2020&nbsp;<a target="_blank" href="https://wrdan.com" rel="noopener noreferrer">DAN.yu</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div><div id="main-container" class="col-sm-9 col-xs-12 main-container invisible"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post-container"><p class="post-title"><a>SQL 数据库基本语法</a></p><p class="post-meta"><span class="date meta-item">发布于&nbsp;2016-10-23</span><span class="meta-item"><i class="fa fa-folder"></i><span>&nbsp;</span><a href="/categories/tech/" title="tech" class="a-tag">tech</a><span>&nbsp;</span></span></p><p class="post-abstract"><p>一、基础</p>
+<p>1、说明：创建数据库</p>
+<pre><code>Create DATABASE database-name</code></pre><p>2、说明：删除数据库</p>
+<pre><code>drop database dbname</code></pre><p>3、说明：备份sql server<br>— 创建 备份数据的 device</p>
+<pre><code>USE master
+EXEC sp_addumpdevice &#39;disk&#39;, &#39;testBack&#39;,
+
+&#39;c:\mssql7backup\MyNwind_1.dat&#39;</code></pre><p>— 开始 备份</p>
+<pre><code>BACKUP DATABASE pubs TO testBack</code></pre><p>4、说明：创建新表</p>
+<pre><code>create table tabname(col1 type1 [not null] [primary key],col2 type2
+
+[not null],..)</code></pre><p>根据已有的表创建新表：<br>A：<code>create table tab_new like tab_old</code> (使用旧表创建新表)<br>B：</p>
+<pre><code>create table tab_new as select col1,col2… from tab_old definition
+only</code></pre><p>5、说明：删除新表</p>
+<pre><code>drop table tabname</code></pre><p>6、说明：增加一个列</p>
+<pre><code>Alter table tabname add column col type</code></pre><p>注：列增加后将不能删除。DB2中列加上后数据类型也不能改变，唯一能改变的</p>
+<p>是增加varchar类型的长度。</p>
+<p>7、说明：添加主键： <code>Alter table tabname add primary key(col)</code><br>说明：删除主键： <code>Alter table tabname drop primary key(col)</code></p>
+<p>8、说明：创建索引：<code>create [unique] index idxname on tabname(col….)</code><br>删除索引：<code>drop index idxname</code><br>注：索引是不可更改的，想更改必须删除重新建。</p>
+<p>9、说明：创建视图：<code>create view viewname as select statement</code><br>删除视图：drop <code>view viewname</code></p>
+<p>10、说明：几个简单的基本的sql语句<br>选择：<code>select * from table1 where</code> 范围<br>插入：<code>insert into table1(field1,field2) values(value1,value2)</code><br>删除：<code>delete from table1 where</code> 范围<br>更新：<code>update table1 set field1=value1 where</code> 范围<br>查找：<code>select * from table1 where field1 like ’%value1%’</code> —like的语</p>
+<p>法很精妙，查资料!<br>排序：select * from table1 order by field1,field2 [desc]<br>总数：select count as totalcount from table1<br>求和：select sum(field1) as sumvalue from table1<br>平均：select avg(field1) as avgvalue from table1<br>最大：select max(field1) as maxvalue from table1<br>最小：select min(field1) as minvalue from table1</p>
+<p>11、说明：几个高级查询运算词<br>A： UNION 运算符<br>UNION 运算符通过组合其他两个结果表（例如 TABLE1 和 TABLE2）并消去表中</p>
+<p>任何重复行而派生出一个结果表。当 ALL 随 UNION 一起使用时（即 UNION ALL</p>
+<p>），不消除重复行。两种情况下，派生表的每一行不是来自 TABLE1 就是来自</p>
+<p>TABLE2。</p>
+<p>B： EXCEPT 运算符<br>EXCEPT 运算符通过包括所有在 TABLE1 中但不在 TABLE2 中的行并消除所有重</p>
+<p>复行而派生出一个结果表。当 ALL 随 EXCEPT 一起使用时 (EXCEPT ALL)，不消</p>
+<p>除重复行。</p>
+<p>C： INTERSECT 运算符<br>INTERSECT 运算符通过只包括 TABLE1 和 TABLE2 中都有的行并消除所有重复行</p>
+<p>而派生出一个结果表。当 ALL 随 INTERSECT 一起使用时 (INTERSECT ALL)，不</p>
+<p>消除重复行。<br>注：使用运算词的几个查询结果行必须是一致的。</p>
+<p>12、说明：使用外连接<br>A、left outer join：<br>左外连接（左连接）：结果集几包括连接表的匹配行，也包括左连接表的所有行</p>
+<p>。<br>SQL: select a.a, a.b, a.c, b.c, b.d, b.f from a LEFT OUT JOIN b ON a.a</p>
+<p>= b.c<br>B：right outer join:<br>右外连接(右连接)：结果集既包括连接表的匹配连接行，也包括右连接表的所有</p>
+<p>行。<br>C：full outer join：<br>全外连接：不仅包括符号连接表的匹配行，还包括两个连接表中的所有记录。</p>
+<p>二、提升</p>
+<p>1、说明：复制表(只复制结构,源表名：a 新表名：b) (Access可用)<br>法一：select * into b from a where 1&lt;&gt;1<br>法二：select top 0 * into b from a</p>
+<p>2、说明：拷贝表(拷贝数据,源表名：a 目标表名：b) (Access可用)<br>insert into b(a, b, c) select d,e,f from b;</p>
+<p>3、说明：跨数据库之间表的拷贝(具体数据使用绝对路径) (Access可用)<br>insert into b(a, b, c) select d,e,f from b in ‘具体数据库’ where 条</p>
+<p>件<br>例子：..from b in ‘“&amp;Server.MapPath(“.”)&amp;”\data.mdb” &amp;”‘ where..</p>
+<p>4、说明：子查询(表名1：a 表名2：b)<br>select a,b,c from a where a IN (select d from b ) 或者: select a,b,c</p>
+<p>from a where a IN (1,2,3)</p>
+<p>5、说明：显示文章、提交人和最后回复时间<br>select a.title,a.username,b.adddate from table a,(select max(adddate)</p>
+<p>adddate from table where table.title=a.title) b</p>
+<p>6、说明：外连接查询(表名1：a 表名2：b)<br>select a.a, a.b, a.c, b.c, b.d, b.f from a LEFT OUT JOIN b ON a.a =</p>
+<p>b.c</p>
+<p>7、说明：在线视图查询(表名1：a )<br>select * from (Select a,b,c FROM a) T where t.a &gt; 1;</p>
+<p>8、说明：between的用法,between限制查询数据范围时包括了边界值,not</p>
+<p>between不包括<br>select * from table1 where time between time1 and time2<br>select a,b,c, from table1 where a not between 数值1 and 数值2</p>
+<p>9、说明：in 的使用方法<br>select * from table1 where a [not] in (‘值1’,’值2’,’值4’,’值6’</p>
+<p>)</p>
+<p>10、说明：两张关联表，删除主表中已经在副表中没有的信息<br>delete from table1 where not exists ( select * from table2 where</p>
+<p>table1.field1=table2.field1 )</p>
+<p>11、说明：四表联查问题：<br>select * from a left inner join b on a.a=b.b right inner join c on</p>
+<p>a.a=c.c inner join d on a.a=d.d where …..</p>
+<p>12、说明：日程安排提前五分钟提醒<br>SQL: select * from 日程安排 where datediff(‘minute’,f开始时间,getdate</p>
+<p>())&gt;5</p>
+<p>13、说明：一条sql 语句搞定数据库分页<br>select top 10 b.* from (select top 20 主键字段,排序字段 from 表名</p>
+<p>order by 排序字段 desc) a,表名 b where b.主键字段 = a.主键字段 order</p>
+<p>by a.排序字段</p>
+<p>14、说明：前10条记录<br>select top 10 * form table1 where 范围</p>
+<p>15、说明：选择在每一组b值相同的数据中对应的a最大的记录的所有信息(类似</p>
+<p>这样的用法可以用于论坛每月排行榜,每月热销产品分析,按科目成绩排名,等</p>
+<p>等.)<br>select a,b,c from tablename ta where a=(select max(a) from tablename</p>
+<p>tb where tb.b=ta.b)</p>
+<p>16、说明：包括所有在 TableA 中但不在 TableB和TableC 中的行并消除所有重</p>
+<p>复行而派生出一个结果表<br>(select a from tableA ) except (select a from tableB) except (select a</p>
+<p>from tableC)</p>
+<p>17、说明：随机取出10条数据<br>select top 10 * from tablename order by newid()</p>
+<p>18、说明：随机选择记录<br>select newid()</p>
+<p>19、说明：删除重复记录<br>Delete from tablename where id not in (select max(id) from tablename</p>
+<p>group by col1,col2,…)</p>
+<p>20、说明：列出数据库里所有的表名<br>select name from sysobjects where type=’U’</p>
+<p>21、说明：列出表里的所有的<br>select name from syscolumns where id=object_id(‘TableName’)</p>
+<p>22、说明：列示type、vender、pcs字段，以type字段排列，case可以方便地实</p>
+<p>现多重选择，类似select 中的case。<br>select type,sum(case vender when ‘A’ then pcs else 0 end),sum(case</p>
+<p>vender when ‘C’ then pcs else 0 end),sum(case vender when ‘B’ then pcs</p>
+<p>else 0 end) FROM tablename group by type<br>显示结果：<br>type vender pcs<br>电脑 A 1<br>电脑 A 1<br>光盘 B 2<br>光盘 A 2<br>手机 B 3<br>手机 C 3</p>
+<p>23、说明：初始化表table1</p>
+<p>TRUNCATE TABLE table1</p>
+<p>24、说明：选择从10到15的记录<br>select top 5 * from (select top 15 * from table order by id asc)</p>
+<p>table_别名 order by id desc<br>三、技巧</p>
+<p>1、1=1，1=2的使用，在SQL语句组合时用的较多</p>
+<p>“where 1=1” 是表示选择全部 “where 1=2”全部不选，<br>如：<br>if @strWhere !=’’<br>begin<br>set @strSQL = ‘select count(*) as Total from [‘ + @tblName + ‘] where</p>
+<p>‘ + @strWhere<br>end<br>else<br>begin<br>set @strSQL = ‘select count(*) as Total from [‘ + @tblName + ‘]’<br>end</p>
+<p>我们可以直接写成<br>set @strSQL = ‘select count(*) as Total from [‘ + @tblName + ‘] where</p>
+<p>1=1 安定 ‘+ @strWhere</p>
+<p>2、收缩数据库<br>–重建索引<br>DBCC REINDEX<br>DBCC INDEXDEFRAG<br>–收缩数据和日志<br>DBCC SHRINKDB<br>DBCC SHRINKFILE</p>
+<p>3、压缩数据库<br>dbcc shrinkdatabase(dbname)</p>
+<p>4、转移数据库给新用户以已存在用户权限<br>exec sp_change_users_login ‘update_one’,’newname’,’oldname’<br>go</p>
+<p>5、检查备份集<br>RESTORE VERIFYONLY from disk=’E:\dvbbs.bak’</p>
+<p>6、修复数据库<br>Alter DATABASE [dvbbs] SET SINGLE_USER<br>GO<br>DBCC CHECKDB(‘dvbbs’,repair_allow_data_loss) WITH TABLOCK<br>GO<br>Alter DATABASE [dvbbs] SET MULTI_USER<br>GO</p>
+<p>7、日志清除<br>SET NOCOUNT ON<br>DECLARE @LogicalFileName sysname,<br>@MaxMinutes INT,<br>@NewSize INT</p>
+<p>USE tablename – 要操作的数据库名<br>Select @LogicalFileName = ‘tablename_log’, – 日志文件名<br>@MaxMinutes = 10, – Limit on time allowed to wrap log.<br>@NewSize = 1 – 你想设定的日志文件的大小(M)</p>
+<p>– Setup / initialize<br>DECLARE @OriginalSize int<br>Select @OriginalSize = size<br>FROM sysfiles<br>Where name = @LogicalFileName<br>Select ‘Original Size of ‘ + db_name() + ‘ LOG is ‘ +<br>CONVERT(VARCHAR(30),@OriginalSize) + ‘ 8K pages or ‘ +<br>CONVERT(VARCHAR(30),(@OriginalSize*8/1024)) + ‘MB’<br>FROM sysfiles<br>Where name = @LogicalFileName<br>Create TABLE DummyTrans<br>(DummyColumn char (8000) not null)</p>
+<p>DECLARE @Counter INT,<br>@StartTime DATETIME,<br>@TruncLog VARCHAR(255)<br>Select @StartTime = GETDATE(),<br>@TruncLog = ‘BACKUP LOG ‘ + db_name() + ‘ WITH TRUNCATE_ONLY’</p>
+<p>DBCC SHRINKFILE (@LogicalFileName, @NewSize)<br>EXEC (@TruncLog)<br>– Wrap the log if necessary.<br>WHILE @MaxMinutes &gt; DATEDIFF (mi, @StartTime, GETDATE()) – time has</p>
+<p>not expired<br>AND @OriginalSize = (Select size FROM sysfiles Where name =</p>
+<p>@LogicalFileName)<br>AND (@OriginalSize * 8 /1024) &gt; @NewSize<br>BEGIN – Outer loop.<br>Select @Counter = 0<br>WHILE ((@Counter &lt; @OriginalSize / 16) AND (@Counter &lt; 50000))<br>BEGIN – update<br>Insert DummyTrans VALUES (‘Fill Log’)<br>Delete DummyTrans<br>Select @Counter = @Counter + 1<br>END<br>EXEC (@TruncLog)<br>END<br>Select ‘Final Size of ‘ + db_name() + ‘ LOG is ‘ +<br>CONVERT(VARCHAR(30),size) + ‘ 8K pages or ‘ +<br>CONVERT(VARCHAR(30),(size*8/1024)) + ‘MB’<br>FROM sysfiles<br>Where name = @LogicalFileName<br>Drop TABLE DummyTrans<br>SET NOCOUNT OFF</p>
+<p>8、说明：更改某个表<br>exec sp_changeobjectowner ‘tablename’,’dbo’</p>
+<p>9、存储更改全部表</p>
+<p>Create PROCEDURE dbo.User_ChangeObjectOwnerBatch<br>@OldOwner as NVARCHAR(128),<br>@NewOwner as NVARCHAR(128)<br>AS</p>
+<p>DECLARE @Name as NVARCHAR(128)<br>DECLARE @Owner as NVARCHAR(128)<br>DECLARE @OwnerName as NVARCHAR(128)</p>
+<p>DECLARE curObject CURSOR FOR<br>select ‘Name’ = name,<br>‘Owner’ = user_name(uid)<br>from sysobjects<br>where user_name(uid)=@OldOwner<br>order by name</p>
+<p>OPEN curObject<br>FETCH NEXT FROM curObject INTO @Name, @Owner<br>WHILE(@@FETCH_STATUS=0)<br>BEGIN<br>if @Owner=@OldOwner<br>begin<br>set @OwnerName = @OldOwner + ‘.’ + rtrim(@Name)<br>exec sp_changeobjectowner @OwnerName, @NewOwner<br>end<br>– select @name,@NewOwner,@OldOwner</p>
+<p>FETCH NEXT FROM curObject INTO @Name, @Owner<br>END</p>
+<p>close curObject<br>deallocate curObject<br>GO</p>
+<p>10、SQL SERVER中直接循环写入数据<br>declare @i int<br>set @i=1<br>while @i&lt;30<br>begin<br>insert into test (userid) values(@i)<br>set @i=@i+1<br>end</p>
+</p></div><div class="pagination"><p class="clearfix"><span class="pre pagbuttons"><a role="navigation" href="/tech/nas_daohang.html" title="闲来无事，仿了一个 iCloud 风格 NAS 导航页面。"><i class="fa fa-angle-double-left"></i>&nbsp;上一篇: 闲来无事，仿了一个 iCloud 风格 NAS 导航页面。</a></span><span>&nbsp;</span><span class="next pagbuttons"><a role="navigation" href="/linux/scistoide.html" title="ESXi 中转换硬盘模式 SCSI 为 IDE。">下一篇: ESXi 中转换硬盘模式 SCSI 为 IDE。&nbsp;<i class="fa fa-angle-double-right"></i></a></span></p></div><a id="comments"></a><div id="valine-container"></div><script>(function(){
+    if(typeof Valine !== 'undefined'){
+        new Valine({
+            el:'#valine-container',
+            appId: 'SphQyGolSRFHnBWzGGz4XeLE-gzGzoHsz',
+            appKey: 'gMqbeGAx90w5NF4G4R43I0UD',
+            placeholder: '快来评论吧😀',
+            path: window.location.pathname
+        })
+    }
+}())
+</script></div></div></div><div class="visible-xs site-bottom-footer"><footer><p>&copy;&nbsp;2020&nbsp;<a target="_blank" href="https://wrdan.com" rel="noopener noreferrer">DAN.yu</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div></div><script src="/js/jquery-3.1.0.min.js"></script><script src="/js/bootstrap.min.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/google-analytics.js"></script><script src="/js/typography.min.js"></script></body></html>

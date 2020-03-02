@@ -1,0 +1,67 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="DAN.yu"><title>NetDrive  Windows 本地挂载网盘实现离线下载在线播放 · 安与星河</title><meta name="description" content="朋友们都有很多网盘，如1T的OneDrive，无限的Google Drive。但是不能离线下载，不能单向同步，体验还不如115和百度云，如何更好的利用他们在Windows系统和Linux系统下进行挂载，然后发挥他们更大的作用，我来谈谈我自己的经验吧，其实很多dalao都了然于心，我只是抛砖引玉了。
+"><meta name="keywords" content=""><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><script src="/js/valine.min.js"></script><meta name="generator" content="Hexo 4.2.0"></head><body><span class="donate-address">唯一指定邮箱：i#wrdan.com</span><div id="stage" class="container"><div class="row"><div id="side-bar" class="col-sm-3 col-xs-12 side-container invisible"><div class="vertical-text site-title"><h3 tabindex="-1" class="site-title-small"><a href="/" class="a-title">浊以静之徐清，安以动之徐生</a></h3><h1 tabindex="-1" class="site-title-large"><a href="/" class="a-title">安与星河</a></h1><!--h6(onclick="triggerSiteNav()") Trigger--></div><br class="visible-lg visible-md visible-sm"><div id="site-nav" class="site-title-links"><ul><li><a href="/">首页</a></li><li><a href="/archives">归档</a></li><li><a href="/categories">分类</a></li><li><a href="/tags">标签</a></li><li><a href="/about/index.html">关于</a></li><li><a href="/links/index.html">友链</a></li><li class="soc"><a href="https://github.com/wrdan" target="_blank" rel="noopener noreferrer"><i class="fa fa-github">&nbsp;</i></a><a href="https://twitter.com/dannyw" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter">&nbsp;</i></a><a href="https://wrdan.com/atom.xml" target="_blank" rel="noopener noreferrer"><i class="fa fa-rss">&nbsp;</i></a></li></ul><div class="visible-lg visible-md visible-sm site-nav-footer"><br class="site-nav-footer-br"><footer><p>&copy;&nbsp;2020&nbsp;<a target="_blank" href="https://wrdan.com" rel="noopener noreferrer">DAN.yu</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div><div id="main-container" class="col-sm-9 col-xs-12 main-container invisible"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post-container"><p class="post-title"><a>NetDrive  Windows 本地挂载网盘实现离线下载在线播放</a></p><p class="post-meta"><span class="date meta-item">发布于&nbsp;2017-08-15</span><span class="meta-item"><i class="fa fa-folder"></i><span>&nbsp;</span><a href="/categories/tech/" title="tech" class="a-tag">tech</a><span>&nbsp;</span></span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a href="/tags/离线下载/" title="离线下载" class="a-tag">离线下载</a><span>&nbsp;</span><a href="/tags/NetDrive/" title="NetDrive" class="a-tag">NetDrive</a><span>&nbsp;</span><a href="/tags/网盘/" title="网盘" class="a-tag">网盘</a><span>&nbsp;</span></span></p><p class="post-abstract"><p>朋友们都有很多网盘，如1T的OneDrive，无限的Google Drive。但是不能离线下载，不能单向同步，体验还不如115和百度云，如何更好的利用他们在Windows系统和Linux系统下进行挂载，然后发挥他们更大的作用，我来谈谈我自己的经验吧，其实很多dalao都了然于心，我只是抛砖引玉了。</p>
+<a id="more"></a>
+
+
+<h2 id="网盘挂载"><a href="#网盘挂载" class="headerlink" title="网盘挂载"></a>网盘挂载</h2><ul>
+<li>原理：<br>基本原理都是利用 Windows Shell Namespace Extension 来实现网盘挂载。<br>例如很多人的都知道的 Expandrive，GMailDrive 等，我这里就以同类型的软件 NetDrive 为例（因为比较好找那啥版本）。</li>
+</ul>
+<h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h3><p><img src="https://ws4.sinaimg.cn/large/720ef3ealy1fgzumsz8b8j20dk058dg2.jpg" alt="image"></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ul>
+<li>安装步骤，以 Google Drive 为例<br>请访问 <a href="http://netdrive.net/" target="_blank" rel="noopener">http://netdrive.net/</a> 下载 Windows 版本<br><a href="https://pan.stnts.com/s/Ogvaqln" target="_blank" rel="noopener">开新版本下载</a><br><a href="https://rdan.ml/WIN/NetDrive_2363.rar" target="_blank" rel="noopener">网盘备份</a></li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/720ef3ealy1fijchi2wxrj207k01qmxc.jpg" alt="网盘高级应用：本地挂载网盘实现离线下载在线播放等之Windows篇"></p>
+<ul>
+<li>安装重启后运行，进入 Drive 界面</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/720ef3ealy1fijchv10pqj20ly0f90uv.jpg" alt="网盘高级应用：本地挂载网盘实现离线下载在线播放等之Windows篇"></p>
+<ul>
+<li>选择链接后按默认的配置即可，Mount as a 推荐选择为 network drive 即网络共享盘，选 local drive 系统会访问频繁并写入很多隐藏文件，影响性能。但有 些程序必须在本地磁盘模式运行的，可以随时修改。</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/720ef3ealy1fijcifu2ghj20fb09faad.jpg" alt="网盘高级应用：本地挂载网盘实现离线下载在线播放等之Windows篇"></p>
+<ul>
+<li>然后输入您的 Google Drive 账号认证。</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/720ef3ealy1fijciot7b3j20d50dbt9f.jpg" alt="网盘高级应用：本地挂载网盘实现离线下载在线播放等之Windows篇"></p>
+<ul>
+<li>选择允许 NetDrive 访问您的云盘。</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/720ef3ealy1fijcivcx8fj20d90b9dg8.jpg" alt="网盘高级应用：本地挂载网盘实现离线下载在线播放等之Windows篇"></p>
+<ul>
+<li>然后在你的资源管理器就会出现</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/720ef3ealy1fijcj5unsrj207n02s3yj.jpg" alt="网盘高级应用：本地挂载网盘实现离线下载在线播放等之Windows篇"></p>
+<ul>
+<li><p>打开它，就可以看到你的文件了，这些文件并不会同步到您的硬盘中，您并不需要 10 个 T 的硬盘。您可以像用自己硬盘一样使用他。当然，速度和响应受限与您的网络速度，我在 Online 服务器上有 20MB/s 的拷贝速度，比某些石头盘好多了。</p>
+</li>
+<li><p>最后，建议您修改一下缓存路径和大小。可以更好的找到空间和速度的平衡。</p>
+</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/720ef3ealy1fijcjf6nndj20lx0f4wfm.jpg" alt="下载"></p>
+<h2 id="实现功能"><a href="#实现功能" class="headerlink" title="实现功能"></a>实现功能</h2><h3 id="离线下载"><a href="#离线下载" class="headerlink" title="离线下载"></a>离线下载</h3><ul>
+<li>我们的 Google Drive 本身是没有离线下载功能的，但我们在服务器上挂载了网盘，就可以利用服务器直接下载到挂载目录下，实现网盘的离线下载。可以直接将 bt 文件下载到 Google Drive 了。</li>
+</ul>
+<h3 id="在线观看"><a href="#在线观看" class="headerlink" title="在线观看"></a>在线观看</h3><ul>
+<li>Google Drive 本身支持 MP4，WebM 的格式观看，下载完成后，可以直接到服务器上在线观看，对于不支持的格式，如 MKV。你有了网络挂载，还是问题么？甚至于你可以在服务器上直接安装 Plex。把电影目录直接指向挂在目录，利用 Plex 的转码功能，实现在线转码观看，只要您的网络速度，CPU 够强劲。我在 Online 服务器上测试了一下，还行。</li>
+</ul>
+<h3 id="扩容"><a href="#扩容" class="headerlink" title="扩容"></a>扩容</h3><ul>
+<li>扩展 vps 服务器空间，把网络硬盘挂给 vps 小鸡，大卖特卖。。。比某些石头盘的 vps 性能还要强劲一些。</li>
+</ul>
+<h3 id="其他替代产品"><a href="#其他替代产品" class="headerlink" title="其他替代产品"></a>其他替代产品</h3><ul>
+<li>喜欢开源的可以 <a href="https://github.com/google/google-drive-shell-extension" target="_blank" rel="noopener">https://github.com/google/google-drive-shell-extension</a> 看看开源版本的 Google Drive Shell Extension，自行修改，NetDrive 就算不开森也可以长期使用，只是不能自动连接和同时只能挂载一个网盘而已。其他的 Expandrive，CloudMounter 等，可入正版。我无钱测试。。</li>
+</ul>
+<blockquote>
+<p>信息来自<a href="http://www.xxorg.com/archives/4282" target="_blank" rel="noopener">服务器 VPS 折腾</a></p>
+</blockquote>
+</p></div><div class="pagination"><p class="clearfix"><span class="pre pagbuttons"><a role="navigation" href="/tech/AriaNg.html" title="一个好看的自适应 Aria2Web 前端"><i class="fa fa-angle-double-left"></i>&nbsp;上一篇: 一个好看的自适应 Aria2Web 前端</a></span><span>&nbsp;</span><span class="next pagbuttons"><a role="navigation" href="/share/08-yingyuan.html" title="08影院自动采集视频v3 2源码破解授权">下一篇: 08影院自动采集视频v3 2源码破解授权&nbsp;<i class="fa fa-angle-double-right"></i></a></span></p></div><a id="comments"></a><div id="valine-container"></div><script>(function(){
+    if(typeof Valine !== 'undefined'){
+        new Valine({
+            el:'#valine-container',
+            appId: 'SphQyGolSRFHnBWzGGz4XeLE-gzGzoHsz',
+            appKey: 'gMqbeGAx90w5NF4G4R43I0UD',
+            placeholder: '快来评论吧😀',
+            path: window.location.pathname
+        })
+    }
+}())
+</script></div></div></div><div class="visible-xs site-bottom-footer"><footer><p>&copy;&nbsp;2020&nbsp;<a target="_blank" href="https://wrdan.com" rel="noopener noreferrer">DAN.yu</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div></div><script src="/js/jquery-3.1.0.min.js"></script><script src="/js/bootstrap.min.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/google-analytics.js"></script><script src="/js/typography.min.js"></script></body></html>

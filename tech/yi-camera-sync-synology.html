@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="DAN.yu"><title>小蚁摄像头同步视频到群晖Surveillance Station · 安与星河</title><meta name="description" content="熬了两夜终于搞定，坑太多了
+拿到小蚁摄像头的 shell
+据说某些系统版本的小蚁摄像头默认没关闭 telnet 服务，那么在做以下事情之前可以先试试你的摄像头是不是已经开启了 telnet 。在终端里运行 telnet xxx.xxx.xxx.xxx xxx.xxx.xxx.xxx 是你摄像头的 i"><meta name="keywords" content=""><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><script src="/js/valine.min.js"></script><meta name="generator" content="Hexo 4.2.0"></head><body><span class="donate-address">唯一指定邮箱：i#wrdan.com</span><div id="stage" class="container"><div class="row"><div id="side-bar" class="col-sm-3 col-xs-12 side-container invisible"><div class="vertical-text site-title"><h3 tabindex="-1" class="site-title-small"><a href="/" class="a-title">浊以静之徐清，安以动之徐生</a></h3><h1 tabindex="-1" class="site-title-large"><a href="/" class="a-title">安与星河</a></h1><!--h6(onclick="triggerSiteNav()") Trigger--></div><br class="visible-lg visible-md visible-sm"><div id="site-nav" class="site-title-links"><ul><li><a href="/">首页</a></li><li><a href="/archives">归档</a></li><li><a href="/categories">分类</a></li><li><a href="/tags">标签</a></li><li><a href="/about/index.html">关于</a></li><li><a href="/links/index.html">友链</a></li><li class="soc"><a href="https://github.com/wrdan" target="_blank" rel="noopener noreferrer"><i class="fa fa-github">&nbsp;</i></a><a href="https://twitter.com/dannyw" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter">&nbsp;</i></a><a href="https://wrdan.com/atom.xml" target="_blank" rel="noopener noreferrer"><i class="fa fa-rss">&nbsp;</i></a></li></ul><div class="visible-lg visible-md visible-sm site-nav-footer"><br class="site-nav-footer-br"><footer><p>&copy;&nbsp;2020&nbsp;<a target="_blank" href="https://wrdan.com" rel="noopener noreferrer">DAN.yu</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div><div id="main-container" class="col-sm-9 col-xs-12 main-container invisible"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post-container"><p class="post-title"><a>小蚁摄像头同步视频到群晖Surveillance Station</a></p><p class="post-meta"><span class="date meta-item">发布于&nbsp;2017-04-05</span><span class="meta-item"><i class="fa fa-folder"></i><span>&nbsp;</span><a href="/categories/tech/" title="tech" class="a-tag">tech</a><span>&nbsp;</span></span></p><p class="post-abstract"><p>熬了两夜终于搞定，坑太多了</p>
+<p>拿到小蚁摄像头的 shell</p>
+<p>据说某些系统版本的小蚁摄像头默认没关闭 telnet 服务，那么在做以下事情之前可以先试试你的摄像头是不是已经开启了 telnet 。在终端里运行 telnet xxx.xxx.xxx.xxx xxx.xxx.xxx.xxx 是你摄像头的 ip 地址，可以在路由器管理界面中查到。如果出现 (none) login: 字样，说明你已经拿到了 shell，就不用做下面的操作了，直接跳到这里。</p>
+<p>把小蚁摄像头里的内存卡取出来，在内存卡根目录建立一个文件夹 test<br>在 test 目录下创建文件 equip_test.sh 粘贴以下内容。</p>
+<pre><code>#!/bin/sh
+# Telnet
+if [ ! -f &quot;/etc/init.d/S88telnet&quot; ]; then
+    echo &quot;#!/bin/sh&quot; &gt; /etc/init.d/S88telnet
+    echo &quot;telnetd &amp;&quot; &gt;&gt; /etc/init.d/S88telnet
+    chmod 755 /etc/init.d/S88telnet
+fi
+dr=`dirname $0`
+# fix bootcycle
+mv $dr/equip_test.sh $dr/equip_test.sh.moved
+reboot</code></pre><p>根据网上的说法，equip_test.sh 会在开机的时候自动运行。</p>
+<p>这个脚本的内容很简单，第一步创建 /etc/init.d/S88telnet 这个文件，内容如下：</p>
+<pre><code>#!/bin/sh
+telnetd &amp;</code></pre><p>这个文件相当于创建了一个 busybox-init 的 服务 [1]，和 ubuntu、CentOS 的服务类似，不过功能更简单一些，直接就是一个 shell 脚本。这个 shell 脚本开启了 telnetd 后台程序。</p>
+<p>第二步是把自身重命名并且重启，避免每次摄像头开机重复运行。</p>
+<p>现在，可以把内存卡查到摄像头中开机，不出意外的话现在再次在终端里输入 telnet xxx.xxx.xxx.xxx 就可以看到 (none) login: 了，现在输入用户名 root 按回车，再输入密码 1234qwer 就可以进入小蚁摄像头的 shell 界面了。</p>
+<p>添加rtsp服务:</p>
+<pre><code>    vi /etc/init.d/S90rtsp
+    chmod +x /etc/init.d/S90rtsp</code></pre><p>第一个坑，直接启动可以启动，自动启动报错<code>can&#39;t load library &#39;libstdc++.so.6&#39;</code></p>
+<pre><code>#!/bin/sh
+/tmp/hd1/rtspsvrM &gt;&gt; /tmp/hd1/rtspsvrM.log 2&gt;&amp;1 &amp;</code></pre><p>最后发现在<code>/home/script/wificonn.sh</code>里添加代码可以运行。至此，同步搞定。</p>
+</p></div><div class="pagination"><p class="clearfix"><span class="pre pagbuttons"><a role="navigation" href="/share/Symantec-to-Comodo.html" title="Symantec SSL证书免费替换成3年Comodo SSL证书"><i class="fa fa-angle-double-left"></i>&nbsp;上一篇: Symantec SSL证书免费替换成3年Comodo SSL证书</a></span><span>&nbsp;</span><span class="next pagbuttons"><a role="navigation" href="/tech/Lets-Encrypt-ssl.html" title="Let’s Encrypt 免费 HTTPS SSL证书获取教程">下一篇: Let’s Encrypt 免费 HTTPS SSL证书获取教程&nbsp;<i class="fa fa-angle-double-right"></i></a></span></p></div><a id="comments"></a><div id="valine-container"></div><script>(function(){
+    if(typeof Valine !== 'undefined'){
+        new Valine({
+            el:'#valine-container',
+            appId: 'SphQyGolSRFHnBWzGGz4XeLE-gzGzoHsz',
+            appKey: 'gMqbeGAx90w5NF4G4R43I0UD',
+            placeholder: '快来评论吧😀',
+            path: window.location.pathname
+        })
+    }
+}())
+</script></div></div></div><div class="visible-xs site-bottom-footer"><footer><p>&copy;&nbsp;2020&nbsp;<a target="_blank" href="https://wrdan.com" rel="noopener noreferrer">DAN.yu</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div></div><script src="/js/jquery-3.1.0.min.js"></script><script src="/js/bootstrap.min.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/google-analytics.js"></script><script src="/js/typography.min.js"></script></body></html>

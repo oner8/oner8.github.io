@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="DAN.yu"><title>ASROCK J3160 ITX DC 安装 ESXi6 0 过程 · 安与星河</title><meta name="description" content="双十一买的配件早就到了，也全部安装完了，打造了一台静音省电家用 NAS路由一体机。一直没时间整理装机过程，每天都是只有晚上有一点时间，只能是每天写一点了。
+
+
+
+下面开始：
+本来满心欢喜的收货了，上来就掉坑里了。安装后启动不了，一直停留在”relocating moduels and startin"><meta name="keywords" content=""><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><script src="/js/valine.min.js"></script><meta name="generator" content="Hexo 4.2.0"></head><body><span class="donate-address">唯一指定邮箱：i#wrdan.com</span><div id="stage" class="container"><div class="row"><div id="side-bar" class="col-sm-3 col-xs-12 side-container invisible"><div class="vertical-text site-title"><h3 tabindex="-1" class="site-title-small"><a href="/" class="a-title">浊以静之徐清，安以动之徐生</a></h3><h1 tabindex="-1" class="site-title-large"><a href="/" class="a-title">安与星河</a></h1><!--h6(onclick="triggerSiteNav()") Trigger--></div><br class="visible-lg visible-md visible-sm"><div id="site-nav" class="site-title-links"><ul><li><a href="/">首页</a></li><li><a href="/archives">归档</a></li><li><a href="/categories">分类</a></li><li><a href="/tags">标签</a></li><li><a href="/about/index.html">关于</a></li><li><a href="/links/index.html">友链</a></li><li class="soc"><a href="https://github.com/wrdan" target="_blank" rel="noopener noreferrer"><i class="fa fa-github">&nbsp;</i></a><a href="https://twitter.com/dannyw" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter">&nbsp;</i></a><a href="https://wrdan.com/atom.xml" target="_blank" rel="noopener noreferrer"><i class="fa fa-rss">&nbsp;</i></a></li></ul><div class="visible-lg visible-md visible-sm site-nav-footer"><br class="site-nav-footer-br"><footer><p>&copy;&nbsp;2020&nbsp;<a target="_blank" href="https://wrdan.com" rel="noopener noreferrer">DAN.yu</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div><div id="main-container" class="col-sm-9 col-xs-12 main-container invisible"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post-container"><p class="post-title"><a>ASROCK J3160 ITX DC 安装 ESXi6 0 过程</a></p><p class="post-meta"><span class="date meta-item">发布于&nbsp;2016-12-22</span><span class="meta-item"><i class="fa fa-folder"></i><span>&nbsp;</span><a href="/categories/tech/" title="tech" class="a-tag">tech</a><span>&nbsp;</span></span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a href="/tags/esxi/" title="esxi" class="a-tag">esxi</a><span>&nbsp;</span><a href="/tags/J3160-ITX/" title="J3160 ITX" class="a-tag">J3160 ITX</a><span>&nbsp;</span></span></p><p class="post-abstract"><p><strong>双十一买的配件早就到了，也全部安装完了，打造了一台静音省电家用 NAS路由一体机。</strong><br><strong>一直没时间整理装机过程，每天都是只有晚上有一点时间，只能是每天写一点了。</strong></p>
+<a id="more"></a>
+
+
+<p><strong><em>下面开始：</em></strong></p>
+<p>本来满心欢喜的收货了，上来就掉坑里了。安装后启动不了，一直停留在”<code>relocating moduels and starting up the kernel</code>“。</p>
+<p><img src="https://ws4.sinaimg.cn/large/6bdf06f1jw1fazzlpo95fj20m80cigmv.jpg" alt=""></p>
+<hr>
+<p>于是百度了一下，原来J3160不在VMware官方认证通过的硬件列表内，所以直接安装官方的ESXi是不成功的。所以我们要想办法支持未通过官方认证的硬件，这里主要是指主板自带的Realtek网卡和SATA硬盘控制器。</p>
+<p>我采用的方法是把Realtek网卡和SATA硬盘控制器的驱动集成到VMware官方的ESXi安装盘里面（可以到网上搜索以及集成驱动的ESXi安装文件），当然也可以安装完原版系统之后手动安装这几个驱动，比如安装主板SATA硬盘控制器驱动如下：</p>
+<pre><code>esxcli software vib install -v https://vibsdepot.v-front.de/depot/vft/sata-xahci-1.35/sata-xahci-1.35-1.x86_64.vib</code></pre><p>也可下载这个修改好的，直接安装。链接: <a href="https://pan.baidu.com/s/1c1PthqK" target="_blank" rel="noopener">https://pan.baidu.com/s/1c1PthqK</a> 密码: rDAN</p>
+<hr>
+<p>有了这个加驱动的安装包，继续开始安装，结果还是一样停留在”<code>relocating moduels and starting up the kernel</code>“。<br>尼玛，坑啊，于是google了一番。找到一篇文章。<a href="http://mobiletiger.jorba.de/vmware-esxi-6-0-n3150-itx-intel-celeron-braswell-platform-problem-solved/" target="_blank" rel="noopener">VMware ESXi 6.0 / N3150 / J3160 ITX – Braswell platform problem solved</a></p>
+<p>于是按照文章中的方法开始安装，也就是双虚拟机法。</p>
+<ol>
+<li>新建虚拟机,稍后安装系统,虚拟机类型选择”其他64bit”。</li>
+<li>插入4G以上空白U盘或者SSD,连接至新建的虚拟机。<strong>注意：使用U盘前一定要先用disk genius把所有分区删除</strong>。</li>
+<li>载入esxi6.0镜像引导安装。</li>
+<li>esxi安装位置选择U盘,安装后自动重启。</li>
+<li>安装完成后,设置固定IP地址,开启ssh,然后关机。</li>
+<li>取下U盘,在实体机上引导至U盘。</li>
+</ol>
+<p><strong><em>上面用的U盘也可换成ssd，或者普通硬盘</em></strong>。</p>
+<p><img src="https://tva1.sinaimg.cn/large/6bdf06f1jw1fb01cxwdw8j20ki096dha.jpg" alt=""></p>
+<p>然而依旧停留在了”relocating moduels and starting up the kernel”界面，不要害怕，博主当时也是一万个草泥马飞过。</p>
+<p><strong>原来启动过程仍然在后台执行，只不过由于ESXi硬件兼容性的原因，后续的启动过程不能显示在显示器上。</strong></p>
+<p><strong>这里注意，无论接不接显示器启动，都会卡在这个显示界面，但是都不会影响后台ESXi的启动。</strong></p>
+<p>等待几分钟后，ESXi就会在后台启动完成，这时候上面设置的IP就能够ping通了，然后通过VMware vSphere Client来管理：</p>
+<p><img src="https://ws4.sinaimg.cn/large/6bdf06f1jw1fb00dorhu5j20bk0ctmyq.jpg" alt=""></p>
+<p>进来以后我们可以看到网卡和SATA硬盘也都能正常的识别出来了，如下图所示：</p>
+<p><img src="https://tva1.sinaimg.cn/large/6bdf06f1jw1fb00n4edenj20jj0743zu.jpg" alt=""></p>
+<p><img src="https://tva1.sinaimg.cn/large/6bdf06f1jw1fb00k47e5nj20jj073jt7.jpg" alt=""></p>
+<p>今天就写到这了，改天上ESXI上安装黑裙晖、openwrt路由器（全局翻*墙，去广告）过程。</p>
+<p><img src="https://tva1.sinaimg.cn/large/6bdf06f1jw1fb017t1n60j20jj08cacg.jpg" alt=""></p>
+<hr>
+<p><strong><em>最后附个小技巧，用ssh直接管理EXSI界面。</em></strong></p>
+<p>先用putty连接esxi，前提是你的esxi的ssh要打开。</p>
+<p>输入以下命令：</p>
+<pre><code>export TERM=linux
+dcui</code></pre><p>这样你就可以不接显示器，直接修改esxi配置了。</p>
+<p><img src="https://tva1.sinaimg.cn/large/6bdf06f1jw1fb1mrk5ajoj20kt0eatak.jpg" alt=""></p>
+</p></div><div class="pagination"><p class="clearfix"><span class="pre pagbuttons"><a role="navigation" href="/soft/xunlei-vip.html" title="软件推荐：迅雷 VIP6 账号破解器 半年稳定使用"><i class="fa fa-angle-double-left"></i>&nbsp;上一篇: 软件推荐：迅雷 VIP6 账号破解器 半年稳定使用</a></span><span>&nbsp;</span><span class="next pagbuttons"><a role="navigation" href="/tech/free-ssl.html" title="推荐几款非常不错的免费 SSL">下一篇: 推荐几款非常不错的免费 SSL&nbsp;<i class="fa fa-angle-double-right"></i></a></span></p></div><a id="comments"></a><div id="valine-container"></div><script>(function(){
+    if(typeof Valine !== 'undefined'){
+        new Valine({
+            el:'#valine-container',
+            appId: 'SphQyGolSRFHnBWzGGz4XeLE-gzGzoHsz',
+            appKey: 'gMqbeGAx90w5NF4G4R43I0UD',
+            placeholder: '快来评论吧😀',
+            path: window.location.pathname
+        })
+    }
+}())
+</script></div></div></div><div class="visible-xs site-bottom-footer"><footer><p>&copy;&nbsp;2020&nbsp;<a target="_blank" href="https://wrdan.com" rel="noopener noreferrer">DAN.yu</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div></div><script src="/js/jquery-3.1.0.min.js"></script><script src="/js/bootstrap.min.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/google-analytics.js"></script><script src="/js/typography.min.js"></script></body></html>

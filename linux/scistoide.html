@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="DAN.yu"><title>ESXi 中转换硬盘模式 SCSI 为 IDE。 · 安与星河</title><meta name="description" content="今天升级LEDE-X64，遇到开机卡死，百度一查是只支持磁盘IDE模式，由于之前磁盘模式为SCSI，于是找到转换为IDE的方法。
+解决步骤如下：
+
+打开ESXi主机SSH登陆；
+选中主机-&amp;gt;配置-&amp;gt;安全配置文件-&amp;gt;属性-&amp;gt;SSH-&amp;gt;选项-&amp;gt;启动，之后点击确定。
+
+"><meta name="keywords" content=""><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><script src="/js/valine.min.js"></script><meta name="generator" content="Hexo 4.2.0"></head><body><span class="donate-address">唯一指定邮箱：i#wrdan.com</span><div id="stage" class="container"><div class="row"><div id="side-bar" class="col-sm-3 col-xs-12 side-container invisible"><div class="vertical-text site-title"><h3 tabindex="-1" class="site-title-small"><a href="/" class="a-title">浊以静之徐清，安以动之徐生</a></h3><h1 tabindex="-1" class="site-title-large"><a href="/" class="a-title">安与星河</a></h1><!--h6(onclick="triggerSiteNav()") Trigger--></div><br class="visible-lg visible-md visible-sm"><div id="site-nav" class="site-title-links"><ul><li><a href="/">首页</a></li><li><a href="/archives">归档</a></li><li><a href="/categories">分类</a></li><li><a href="/tags">标签</a></li><li><a href="/about/index.html">关于</a></li><li><a href="/links/index.html">友链</a></li><li class="soc"><a href="https://github.com/wrdan" target="_blank" rel="noopener noreferrer"><i class="fa fa-github">&nbsp;</i></a><a href="https://twitter.com/dannyw" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter">&nbsp;</i></a><a href="https://wrdan.com/atom.xml" target="_blank" rel="noopener noreferrer"><i class="fa fa-rss">&nbsp;</i></a></li></ul><div class="visible-lg visible-md visible-sm site-nav-footer"><br class="site-nav-footer-br"><footer><p>&copy;&nbsp;2020&nbsp;<a target="_blank" href="https://wrdan.com" rel="noopener noreferrer">DAN.yu</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div><div id="main-container" class="col-sm-9 col-xs-12 main-container invisible"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post-container"><p class="post-title"><a>ESXi 中转换硬盘模式 SCSI 为 IDE。</a></p><p class="post-meta"><span class="date meta-item">发布于&nbsp;2016-10-22</span><span class="meta-item"><i class="fa fa-folder"></i><span>&nbsp;</span><a href="/categories/linux/" title="linux" class="a-tag">linux</a><span>&nbsp;</span></span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a href="/tags/esxi/" title="esxi" class="a-tag">esxi</a><span>&nbsp;</span><a href="/tags/虚拟机/" title="虚拟机" class="a-tag">虚拟机</a><span>&nbsp;</span></span></p><p class="post-abstract"><p>今天升级LEDE-X64，遇到开机卡死，百度一查是只支持磁盘IDE模式，由于之前磁盘模式为SCSI，于是找到转换为IDE的方法。</p>
+<p>解决步骤如下：</p>
+<ol>
+<li><p>打开ESXi主机SSH登陆；</p>
+<p>选中主机<code>-&gt;配置-&gt;安全配置文件-&gt;属性-&gt;SSH-&gt;选项-&gt;启动</code>，之后点击确定。<br><img src="https://img.alicdn.com/imgextra/i2/105063002/TB26JtQb31I.eBjSszeXXc2hpXa_%21%21105063002.png" alt="2016-10-22_235158.png"></p>
+</li>
+</ol>
+<ol start="2">
+<li>使用SSH登陆到ESXi主机，cd切换到虚拟机的硬盘目录<pre class="line-numbers language-js"><code class="language-js">cd <span class="token operator">/</span>vmfs<span class="token operator">/</span>volumes<span class="token operator">/</span>datastore<span class="token operator">/</span>VMname<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li>修改相应硬盘的vmdk文件，找到ddb.adapterType，将其中的ddb.adapterType的值由“lsilogic”修改为“ide”，之后保存该vmdk文件，文件内容如下：</li>
+</ol>
+<pre class="line-numbers language-css"><code class="language-css">======================================================
+# Disk DescriptorFile
+version=<span class="token number">3</span>
+encoding=<span class="token string">"UTF-8"</span>
+CID=<span class="token number">993</span>dc<span class="token number">925</span>
+parentCID=ffffffff
+isNativeSnapshot=<span class="token string">"no"</span>
+createType=<span class="token string">"vmfs"</span>
+
+# Extent description
+RW <span class="token number">266357700</span> VMFS <span class="token string">"casco-dc1-lc-flat.vmdk"</span>
+
+# Change Tracking File
+changeTrackPath=<span class="token string">"casco-dc1-lc-ctk.vmdk"</span>
+
+# The Disk Data Base 
+<span class="token hexcode">#DDB</span>
+
+ddb<span class="token number">.</span>deletable = <span class="token string">"true"</span>
+ddb<span class="token number">.</span>geometry<span class="token number">.</span>biosHeads = <span class="token string">"255"</span>
+ddb<span class="token number">.</span>geometry<span class="token number">.</span>biosSectors = <span class="token string">"63"</span>
+ddb<span class="token number">.</span>geometry<span class="token number">.</span>biosCylinders = <span class="token string">"16580"</span>
+ddb<span class="token number">.</span>adapterType = <span class="token string">"lsilogic"</span>
+ddb<span class="token number">.</span>geometry<span class="token number">.</span>sectors = <span class="token string">"63"</span>
+ddb<span class="token number">.</span>geometry<span class="token number">.</span>heads = <span class="token string">"16"</span>
+ddb<span class="token number">.</span>geometry<span class="token number">.</span>cylinders = <span class="token string">"16383"</span>
+ddb<span class="token number">.</span>uuid = <span class="token string">"60 00 C2 9a 43 fa 2b a6-74 06 4e c7 4d 1a 6d 68"</span>
+ddb<span class="token number">.</span>longContentID = <span class="token string">"52221f36e0f992d5465a8a6b993dc925"</span>
+ddb<span class="token number">.</span>virtualHWVersion = <span class="token string">"7"</span>
+ddb<span class="token number">.</span>toolsVersion = <span class="token string">"8290"</span>
+====================End of the VMDK file==========================<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol start="4">
+<li>打开vSphere Client，选中虚拟机-&gt;右键-&gt;编辑设置-&gt;，选中需要修改的IDE硬盘，点击“移除”，选择“从虚拟机中删除”(<code>注意:千万不要从硬盘删除文件！</code>)</li>
+<li>添加硬盘<code>添加-&gt;硬盘-&gt;使用现有虚拟磁盘</code>,找到需要修改硬盘的vmdk文件，添加,直到完成即可。</li>
+</ol>
+</p></div><div class="pagination"><p class="clearfix"><span class="pre pagbuttons"><a role="navigation" href="/tech/sql.html" title="SQL 数据库基本语法"><i class="fa fa-angle-double-left"></i>&nbsp;上一篇: SQL 数据库基本语法</a></span><span>&nbsp;</span><span class="next pagbuttons"><a role="navigation" href="/linux/crontab.html" title="Linux 下执行定时任务 crontab 命令详解">下一篇: Linux 下执行定时任务 crontab 命令详解&nbsp;<i class="fa fa-angle-double-right"></i></a></span></p></div><a id="comments"></a><div id="valine-container"></div><script>(function(){
+    if(typeof Valine !== 'undefined'){
+        new Valine({
+            el:'#valine-container',
+            appId: 'SphQyGolSRFHnBWzGGz4XeLE-gzGzoHsz',
+            appKey: 'gMqbeGAx90w5NF4G4R43I0UD',
+            placeholder: '快来评论吧😀',
+            path: window.location.pathname
+        })
+    }
+}())
+</script></div></div></div><div class="visible-xs site-bottom-footer"><footer><p>&copy;&nbsp;2020&nbsp;<a target="_blank" href="https://wrdan.com" rel="noopener noreferrer">DAN.yu</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div></div><script src="/js/jquery-3.1.0.min.js"></script><script src="/js/bootstrap.min.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/google-analytics.js"></script><script src="/js/typography.min.js"></script></body></html>

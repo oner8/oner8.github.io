@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="DAN.yu"><title>Linux 下执行定时任务 crontab 命令详解 · 安与星河</title><meta name="description" content="先来一个小小的例子查看当前路径：
+[root@root test]# pwd
+/home/admin/test 
+[root@root test]# crontab -l
+查看当前用户的定时任务 也可以 crontab -uroot -l查看指定用户的定时任务。千万不要忘了中间的 sh 表示用户拿什"><meta name="keywords" content=""><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><script src="/js/valine.min.js"></script><meta name="generator" content="Hexo 4.2.0"></head><body><span class="donate-address">唯一指定邮箱：i#wrdan.com</span><div id="stage" class="container"><div class="row"><div id="side-bar" class="col-sm-3 col-xs-12 side-container invisible"><div class="vertical-text site-title"><h3 tabindex="-1" class="site-title-small"><a href="/" class="a-title">浊以静之徐清，安以动之徐生</a></h3><h1 tabindex="-1" class="site-title-large"><a href="/" class="a-title">安与星河</a></h1><!--h6(onclick="triggerSiteNav()") Trigger--></div><br class="visible-lg visible-md visible-sm"><div id="site-nav" class="site-title-links"><ul><li><a href="/">首页</a></li><li><a href="/archives">归档</a></li><li><a href="/categories">分类</a></li><li><a href="/tags">标签</a></li><li><a href="/about/index.html">关于</a></li><li><a href="/links/index.html">友链</a></li><li class="soc"><a href="https://github.com/wrdan" target="_blank" rel="noopener noreferrer"><i class="fa fa-github">&nbsp;</i></a><a href="https://twitter.com/dannyw" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter">&nbsp;</i></a><a href="https://wrdan.com/atom.xml" target="_blank" rel="noopener noreferrer"><i class="fa fa-rss">&nbsp;</i></a></li></ul><div class="visible-lg visible-md visible-sm site-nav-footer"><br class="site-nav-footer-br"><footer><p>&copy;&nbsp;2020&nbsp;<a target="_blank" href="https://wrdan.com" rel="noopener noreferrer">DAN.yu</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div><div id="main-container" class="col-sm-9 col-xs-12 main-container invisible"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post-container"><p class="post-title"><a>Linux 下执行定时任务 crontab 命令详解</a></p><p class="post-meta"><span class="date meta-item">发布于&nbsp;2016-10-22</span><span class="meta-item"><i class="fa fa-folder"></i><span>&nbsp;</span><a href="/categories/linux/" title="linux" class="a-tag">linux</a><span>&nbsp;</span></span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a href="/tags/Linux定时任务/" title="Linux定时任务" class="a-tag">Linux定时任务</a><span>&nbsp;</span><a href="/tags/crontab-命令详解/" title="crontab 命令详解" class="a-tag">crontab 命令详解</a><span>&nbsp;</span></span></p><p class="post-abstract"><h2 id="先来一个小小的例子"><a href="#先来一个小小的例子" class="headerlink" title="先来一个小小的例子"></a>先来一个小小的例子</h2><p>查看当前路径：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">[root@root test]# pwd
+/home/admin/test 
+[root@root test]# crontab -l<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>查看当前用户的定时任务 也可以 crontab -uroot -l查看指定用户的定时任务。<br>千万不要忘了中间的 sh 表示用户拿什么来执行命令</p>
+<pre class="line-numbers language-shell"><code class="language-shell">00 02 * * * sh /home/admin/optbash/dailyBackup.sh
+00 02 * * * sh /home/admin/optbash/deleteDebugSql.sh<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>建立一个用定时任务跑的bash脚本：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">[root@root test]# touch test.sh
+[root@root test]# vim test.sh<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>编辑如下内容，将系统当前时间输出到 console.txt 文件然后保存，增加可执行权限</p>
+<pre class="line-numbers language-shell"><code class="language-shell">/bin/echo `date` > /home/admin/test/console.txt
+[root@root test]# ll
+total 8
+-rw-r--r-- 1 root root 29 Mar 27 21:31 console.txt
+-rwxr-xr-x 1 root root 48 Mar 27 21:28 test.sh
+[root@root test]# chmod +x ./test.sh<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>追加 crontab 定时任务，每分钟触发：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">[root@root test]# crontab -e
+00 02 * * * sh /home/admin/optbash/dailyBackup.sh
+00 02 * * * sh /home/admin/optbash/deleteDebugSql.sh
+*  *  * * * sh /home/admin/test/test.sh<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>前面是已经存在的定时任务，后面执行test.sh脚本的是追加的 保存后提示已经装载了新的定时任务</p>
+<pre class="line-numbers language-shell"><code class="language-shell">"/tmp/crontab.HauiiV" 3L, 143C written
+crontab: installing new crontab<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>再次查看定时任务列表,可以看到定时任务已经添加</p>
+<pre class="line-numbers language-shell"><code class="language-shell">[root@root test]# crontab -l
+00 02 * * * sh /home/admin/optbash/dailyBackup.sh
+00 02 * * * sh /home/admin/optbash/deleteDebugSql.sh
+*  *  * * * sh /home/admin/test/test.sh
+[root@root test]# <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>查看console.txt有没有每分钟写入console.txt文件</p>
+<pre class="line-numbers language-shell"><code class="language-shell">[root@root test]# vim console.txt
+Fri Mar 27 21:40:01 EDT 2015 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>可以看到最近一次的写入时间。</p>
+<h2 id="看看crontab-的时间表达式"><a href="#看看crontab-的时间表达式" class="headerlink" title="看看crontab 的时间表达式"></a>看看crontab 的时间表达式</h2><pre class="line-numbers language-shell"><code class="language-shell">基本格式 :
+*　　*　　*　　*　　*　　command
+分　时　日　月　周　命令<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://ws4.sinaimg.cn/large/6bdf06f1ly1feamiusg8sj20el0brdg2.jpg" alt="image"></p>
+<p>然后来几个实际的例子：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">1、每分钟执行一次            
+*  *  *  *  * 
+
+2、每隔一小时执行一次        
+00  *  *  *  * 
+or
+* */1 * * *  (/表示频率)
+
+3、每小时的15和30分各执行一次 
+15,45 * * * * （,表示并列）
+
+4、在每天上午 8- 11时中间每小时 15 ，45分各执行一次
+15,45 8-11 * * * command （-表示范围）
+
+5、每个星期一的上午8点到11点的第3和第15分钟执行
+3,15 8-11 * * 1 command
+
+6、每隔两天的上午8点到11点的第3和第15分钟执行
+3,15 8-11 */2 * * command<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="其他命令介绍"><a href="#其他命令介绍" class="headerlink" title="其他命令介绍"></a>其他命令介绍</h2><pre class="line-numbers language-shell"><code class="language-shell">名称 : crontab
+
+使用权限 : 所有使用者
+
+使用方式 :
+
+crontab file [-u user]-用指定的文件替代目前的crontab。
+
+crontab-[-u user]-用标准输入替代目前的crontab.
+
+crontab-1[user]-列出用户目前的crontab.
+
+crontab-e[user]-编辑用户目前的crontab.
+
+crontab-d[user]-删除用户目前的crontab.
+
+crontab-c dir- 指定crontab的目录。 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="crond-安装与配置服务"><a href="#crond-安装与配置服务" class="headerlink" title="crond 安装与配置服务"></a>crond 安装与配置服务</h2><pre class="line-numbers language-shell"><code class="language-shell">安装crontab：
+
+yum install crontabs
+
+服务操作说明：
+
+/sbin/service crond start //启动服务
+
+/sbin/service crond stop //关闭服务
+
+/sbin/service crond restart //重启服务
+
+/sbin/service crond reload //重新载入配置
+
+查看crontab服务状态：
+
+service crond status
+
+手动启动crontab服务：
+
+service crond start
+
+查看crontab服务是否已设置为开机启动，执行命令：
+
+ntsysv
+
+加入开机自动启动：
+
+chkconfig –level 35 crond on<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="附常用命令Cron的启动与关闭"><a href="#附常用命令Cron的启动与关闭" class="headerlink" title="附常用命令Cron的启动与关闭"></a>附常用命令Cron的启动与关闭</h2><p>Cron是Linux的内置服务，可以用以下的方法启动.关闭这个服务:</p>
+<pre class="line-numbers language-shell"><code class="language-shell">/sbin/service crond start           //启动服务
+/sbin/service crond stop            //关闭服务
+/sbin/service crond restart        //重启服务
+/sbin/service crond reload         //重新载入配置<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</p></div><div class="pagination"><p class="clearfix"><span class="pre pagbuttons"><a role="navigation" href="/linux/scistoide.html" title="ESXi 中转换硬盘模式 SCSI 为 IDE。"><i class="fa fa-angle-double-left"></i>&nbsp;上一篇: ESXi 中转换硬盘模式 SCSI 为 IDE。</a></span><span>&nbsp;</span><span class="next pagbuttons"><a role="navigation" href="/ros/dnspod.html" title="Openwrt 计划任务定时更新 DNSPod。">下一篇: Openwrt 计划任务定时更新 DNSPod。&nbsp;<i class="fa fa-angle-double-right"></i></a></span></p></div><a id="comments"></a><div id="valine-container"></div><script>(function(){
+    if(typeof Valine !== 'undefined'){
+        new Valine({
+            el:'#valine-container',
+            appId: 'SphQyGolSRFHnBWzGGz4XeLE-gzGzoHsz',
+            appKey: 'gMqbeGAx90w5NF4G4R43I0UD',
+            placeholder: '快来评论吧😀',
+            path: window.location.pathname
+        })
+    }
+}())
+</script></div></div></div><div class="visible-xs site-bottom-footer"><footer><p>&copy;&nbsp;2020&nbsp;<a target="_blank" href="https://wrdan.com" rel="noopener noreferrer">DAN.yu</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div></div><script src="/js/jquery-3.1.0.min.js"></script><script src="/js/bootstrap.min.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/google-analytics.js"></script><script src="/js/typography.min.js"></script></body></html>

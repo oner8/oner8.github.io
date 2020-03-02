@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="DAN.yu"><title>🚂 12306 购票助手 – 开源分布式多账号购票，微信钉钉电话通知 · 安与星河</title><meta name="description" content="🚂 12306 购票助手 是一款基于 Python3.6 的开源、分布式、多账号、多任务 12306 购票助手，支持 Web 页面管理，支持钉钉、微信、Telegram、邮箱通知，能够只查票，也可以直接下单买票。
+
+
+
+支持分布式是一个很神奇的事情，一般的个人用工具，很少会支持分布式…而这个 🚂"><meta name="keywords" content=""><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><script src="/js/valine.min.js"></script><meta name="generator" content="Hexo 4.2.0"></head><body><span class="donate-address">唯一指定邮箱：i#wrdan.com</span><div id="stage" class="container"><div class="row"><div id="side-bar" class="col-sm-3 col-xs-12 side-container invisible"><div class="vertical-text site-title"><h3 tabindex="-1" class="site-title-small"><a href="/" class="a-title">浊以静之徐清，安以动之徐生</a></h3><h1 tabindex="-1" class="site-title-large"><a href="/" class="a-title">安与星河</a></h1><!--h6(onclick="triggerSiteNav()") Trigger--></div><br class="visible-lg visible-md visible-sm"><div id="site-nav" class="site-title-links"><ul><li><a href="/">首页</a></li><li><a href="/archives">归档</a></li><li><a href="/categories">分类</a></li><li><a href="/tags">标签</a></li><li><a href="/about/index.html">关于</a></li><li><a href="/links/index.html">友链</a></li><li class="soc"><a href="https://github.com/wrdan" target="_blank" rel="noopener noreferrer"><i class="fa fa-github">&nbsp;</i></a><a href="https://twitter.com/dannyw" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter">&nbsp;</i></a><a href="https://wrdan.com/atom.xml" target="_blank" rel="noopener noreferrer"><i class="fa fa-rss">&nbsp;</i></a></li></ul><div class="visible-lg visible-md visible-sm site-nav-footer"><br class="site-nav-footer-br"><footer><p>&copy;&nbsp;2020&nbsp;<a target="_blank" href="https://wrdan.com" rel="noopener noreferrer">DAN.yu</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div><div id="main-container" class="col-sm-9 col-xs-12 main-container invisible"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post-container"><p class="post-title"><a>🚂 12306 购票助手 – 开源分布式多账号购票，微信钉钉电话通知</a></p><p class="post-meta"><span class="date meta-item">发布于&nbsp;2019-01-17</span><span class="meta-item"><i class="fa fa-folder"></i><span>&nbsp;</span><a href="/categories/share/" title="share" class="a-tag">share</a><span>&nbsp;</span></span></p><p class="post-abstract"><p>🚂 12306 购票助手 是一款基于 Python3.6 的开源、分布式、多账号、多任务 12306 购票助手，支持 Web 页面管理，支持钉钉、微信、Telegram、邮箱通知，能够只查票，也可以直接下单买票。</p>
+<a id="more"></a>
+
+<p><img src="//ws1.sinaimg.cn/large/6bdf06f1ly1fz9xdhmdj0j20vi0doq7a.jpg" alt=""></p>
+<p>支持分布式是一个很神奇的事情，一般的个人用工具，很少会支持分布式…而这个 🚂 12306 购票助手 可以让你在多台服务器上部署，提高抢票成功率。</p>
+<p>不过，🚂 12306 购票助手是有使用门槛的，首先你需要自己动手修改配置文件，可能会挡住一部分用户。其次，python 不是必须的，只需要会运行即可。另外还有 docker 方式可以使用。</p>
+<p><img src="https://tva1.sinaimg.cn/large/6bdf06f1ly1fz9x580d3dj20m40frq3s.jpg" alt=""></p>
+<p>群晖 NAS 运行 docker 实测成功。</p>
+<p><img src="https://tva1.sinaimg.cn/large/6bdf06f1ly1fz9xc0xi5ej20wm0lf0v6.jpg" alt=""></p>
+<p>在配置文件中，你需要修改 12306 账号（仅查询不需要账号）、打码平台、语音验证码、钉钉通知、Telegram 机器人、微信消息推送、分布式集群设置等信息，只要仔细阅读说明，门槛不高。</p>
+<p>目前实现的功能有：</p>
+<ul>
+<li>多日期查询余票</li>
+<li>自动打码下单</li>
+<li>用户状态恢复</li>
+<li>电话语音通知</li>
+<li>多账号、多任务、多线程支持</li>
+<li>单个任务多站点查询</li>
+<li>分布式运行</li>
+<li>Docker 支持</li>
+<li>动态修改配置文件</li>
+<li>邮件通知</li>
+<li>Web 管理页面</li>
+<li>微信消息通知</li>
+</ul>
+<p>下单成功后会有提示，以及之前配置好的通知：</p>
+<p><img src="https://tva1.sinaimg.cn/large/6bdf06f1ly1fz9xcdbaztj211r0pt75o.jpg" alt=""></p>
+<p>对于初级用户，这是一个需要动手能力和执行力的工具，就看你想不想了。</p>
+<p>目前 🚂 12306 购票助手 在 <a href="https://github.com/pjialin/py12306" target="_blank" rel="noopener">GitHub</a> 开源。</p>
+</p></div><div class="pagination"><p class="clearfix"><span class="pre pagbuttons"><a role="navigation" href="/share/nps-nat.html" title="NPS 一款带web管理端的轻量强大的内网穿透软件"><i class="fa fa-angle-double-left"></i>&nbsp;上一篇: NPS 一款带web管理端的轻量强大的内网穿透软件</a></span><span>&nbsp;</span><span class="next pagbuttons"><a role="navigation" href="/share/DANNY-API.html" title="DANNY API 接口服务上线">下一篇: DANNY API 接口服务上线&nbsp;<i class="fa fa-angle-double-right"></i></a></span></p></div><a id="comments"></a><div id="valine-container"></div><script>(function(){
+    if(typeof Valine !== 'undefined'){
+        new Valine({
+            el:'#valine-container',
+            appId: 'SphQyGolSRFHnBWzGGz4XeLE-gzGzoHsz',
+            appKey: 'gMqbeGAx90w5NF4G4R43I0UD',
+            placeholder: '快来评论吧😀',
+            path: window.location.pathname
+        })
+    }
+}())
+</script></div></div></div><div class="visible-xs site-bottom-footer"><footer><p>&copy;&nbsp;2020&nbsp;<a target="_blank" href="https://wrdan.com" rel="noopener noreferrer">DAN.yu</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div></div><script src="/js/jquery-3.1.0.min.js"></script><script src="/js/bootstrap.min.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/google-analytics.js"></script><script src="/js/typography.min.js"></script></body></html>
