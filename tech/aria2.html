@@ -6,17 +6,19 @@
 <p><img src="https://tva1.sinaimg.cn/large/6bdf06f1ly1fij5vokswrj20dw07175b.jpg" alt=""></p>
 <h3 id="安装aria2"><a href="#安装aria2" class="headerlink" title="安装aria2"></a>安装aria2</h3><p>aria2是一个轻量级的多协议和多源命令行下载工具。支持HTTP/ HTTPS，FTP，SFTP， BitTorrent和Metalink。aria2可以通过内置的 JSON-RPC和XML-RPC接口进行操作。</p>
 <p>CentOS内置软件源并未包含aria2，需要先安装epel，再安装aria2，执行下面的命令即可</p>
-<pre><code>#安装epel源
-yum -y install epel-release
-#安装aria2
-yum -y install aria2
-#查看aria2版本
-aria2c -v</code></pre><p>安装完毕后已经可以使用aria2多线程下载了，常用参数如下：</p>
-<pre><code>-o:下载并重命名
--x:需要使用的线程数，后面跟数字，线程数越多速度越快(最多16)
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">#安装epel源</span>
+yum -y <span class="token function">install</span> epel-release
+<span class="token comment" spellcheck="true">#安装aria2</span>
+yum -y <span class="token function">install</span> aria2
+<span class="token comment" spellcheck="true">#查看aria2版本</span>
+aria2c -v<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>安装完毕后已经可以使用aria2多线程下载了，常用参数如下：</p>
+<pre class="line-numbers language-bash"><code class="language-bash">-o:下载并重命名
+-x:需要使用的线程数，后面跟数字，线程数越多速度越快<span class="token punctuation">(</span>最多16<span class="token punctuation">)</span>
 -c:断点续传
-#使用16线程下载一个文件
-aria2c -x 16 https://soft.wrdan.com/windows/ChromeStandaloneSetup.exe</code></pre><h3 id="配置aria2"><a href="#配置aria2" class="headerlink" title="配置aria2"></a>配置aria2</h3><p>aria2配置比较多，如果我们想通过WEB界面的方式离线下载需要开启 JSON-RPC 支持，将下面的规则适当修改并另存为<code>/home/soft/aria2/aria2.conf</code></p>
+<span class="token comment" spellcheck="true">#使用16线程下载一个文件</span>
+aria2c -x 16 https://soft.wrdan.com/windows/ChromeStandaloneSetup.exe<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="配置aria2"><a href="#配置aria2" class="headerlink" title="配置aria2"></a>配置aria2</h3><p>aria2配置比较多，如果我们想通过WEB界面的方式离线下载需要开启 JSON-RPC 支持，将下面的规则适当修改并另存为<code>/home/soft/aria2/aria2.conf</code></p>
 <pre><code>#创建下载目录
 mkdir -p /home/download
 #创建文件夹
