@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>安与星河</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://wrdan.com/"/>
+  <updated>2020-03-01T18:50:43.541Z</updated>
+  <id>https://wrdan.com/</id>
+  
+  <author>
+    <name>DAN.yu</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>迁移到了Hexo</title>
+    <link href="https://wrdan.com/life/change-to-Hexo.html"/>
+    <id>https://wrdan.com/life/change-to-Hexo.html</id>
+    <published>2020-03-02T18:21:00.000Z</published>
+    <updated>2020-03-01T18:50:43.541Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;2020-03-03:&lt;/p&gt;
+&lt;p&gt;服务器到期，不想续费了，于是使用纯静态博客Hexo，托管于&lt;a href=&quot;https://pages.github.com/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;GitHub
+        
+      
+    
+    </summary>
+    
+    
+      <category term="life" scheme="https://wrdan.com/categories/life/"/>
+    
+    
+      <category term="Hexo" scheme="https://wrdan.com/tags/Hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>iCloud 风格 NAS 响应式导航页面 支持内外网切换</title>
+    <link href="https://wrdan.com/share/nas_cloud.html"/>
+    <id>https://wrdan.com/share/nas_cloud.html</id>
+    <published>2017-02-01T16:00:00.000Z</published>
+    <updated>2020-03-01T18:27:24.337Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;strong&gt;最近一直有同学求我这个iCloud 风格 NAS 导航页面，由于年前一直忙，所以赶紧趁年假重新整理了一下代码，发布出来。能力有限，水平一般，望高手轻喷。&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&quot;2018年11月11日新增两个网友制作的魔改版&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="share" scheme="https://wrdan.com/categories/share/"/>
+    
+    
+      <category term="nas导航" scheme="https://wrdan.com/tags/nas%E5%AF%BC%E8%88%AA/"/>
+    
+      <category term="iCloud nas导航" scheme="https://wrdan.com/tags/iCloud-nas%E5%AF%BC%E8%88%AA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>分享：磁力转种子，种子转磁力网站</title>
+    <link href="https://wrdan.com/share/torrent2magnet.html"/>
+    <id>https://wrdan.com/share/torrent2magnet.html</id>
+    <published>2017-01-16T16:30:00.000Z</published>
+    <updated>2020-03-01T18:24:57.330Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;https://tva1.sinaimg.cn/large/6f8a2832gw1fbnvs6dhe2j20og09twfc.jpg&quot; alt=&quot;种子转磁力&quot;&gt;&lt;br&gt;&lt;img src=&quot;https://tva1.sinaimg.cn/large/6f8a2832gw1fbnvs77b98j20og09t0tv.jpg&quot; alt=&quot;磁力转种子&quot;&gt;&lt;/p&gt;
+&lt;p&gt;对于磁力链接很多老司机都明白是什么， 有了磁力链接就可以在迅雷、旋风中直接进行下载。&lt;br&gt;下面这个网站可以很简单的将磁力和种子相互进行转换。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="share" scheme="https://wrdan.com/categories/share/"/>
+    
+    
+      <category term="磁力转种子" scheme="https://wrdan.com/tags/%E7%A3%81%E5%8A%9B%E8%BD%AC%E7%A7%8D%E5%AD%90/"/>
+    
+      <category term="种子转磁力" scheme="https://wrdan.com/tags/%E7%A7%8D%E5%AD%90%E8%BD%AC%E7%A3%81%E5%8A%9B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>我的第一个小爬虫：爬取腾讯新闻保存到TXT</title>
+    <link href="https://wrdan.com/python/qqnews-spider.html"/>
+    <id>https://wrdan.com/python/qqnews-spider.html</id>
+    <published>2017-01-16T16:30:00.000Z</published>
+    <updated>2020-03-01T18:26:13.270Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;https://tva1.sinaimg.cn/large/6bdf06f1ly1fc0i8ei8jfj20q20b1aax.jpg&quot; alt=&quot;python&quot;&gt;&lt;/p&gt;
+&lt;p&gt;最近喜欢上了Pyhon这门语言，简洁、高效、简单，像我这种菜鸟都能学会的语言，我就不多说了，你懂的。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="python" scheme="https://wrdan.com/categories/python/"/>
+    
+    
+      <category term="爬虫" scheme="https://wrdan.com/tags/%E7%88%AC%E8%99%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>万事开头难</title>
+    <link href="https://wrdan.com/life/1st.html"/>
+    <id>https://wrdan.com/life/1st.html</id>
+    <published>2016-10-20T16:21:00.000Z</published>
+    <updated>2020-03-01T18:23:07.974Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;img src=&quot;https://tva1.sinaimg.cn/large/6bdf06f1ly1feiw90o4k1g20jg08cwej.gif&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="life" scheme="https://wrdan.com/categories/life/"/>
+    
+    
+      <category term="esxi" scheme="https://wrdan.com/tags/esxi/"/>
+    
+      <category term="虚拟机" scheme="https://wrdan.com/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
+    
+  </entry>
+  
+</feed>
