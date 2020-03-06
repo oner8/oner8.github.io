@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://wrdan.com/"/>
-  <updated>2020-03-02T09:12:07.084Z</updated>
+  <updated>2020-03-06T08:04:37.072Z</updated>
   <id>https://wrdan.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>博客迁移到了 Hexo</title>
+    <link href="https://wrdan.com/share/hexo.html"/>
+    <id>https://wrdan.com/share/hexo.html</id>
+    <published>2020-03-03T02:00:00.000Z</published>
+    <updated>2020-03-06T08:04:37.072Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;img src=&quot;https://ae01.alicdn.com/kf/Ha26cb3a6cbe74ec0b28908eaa7f0dd9eR.png&quot; alt=&quot;hexo+github&quot;&gt;&lt;/p&gt;
+&lt;p&gt;vps到期了，不想续费，于是迁移到了
+        
+      
+    
+    </summary>
+    
+    
+      <category term="share" scheme="https://wrdan.com/categories/share/"/>
+    
+    
+      <category term="hexo" scheme="https://wrdan.com/tags/hexo/"/>
+    
+  </entry>
   
   <entry>
     <title>一年一度的集五福活动又到了   2020支付宝五福必备</title>
@@ -446,25 +474,6 @@
     <summary type="html">
     
       &lt;p&gt;分享一个百度云文件的方法,&lt;code&gt;SpeedKoalaBD&lt;/code&gt;，好像是使用&lt;code&gt;Aria2&lt;/code&gt;下载，亲测可以满速。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="share" scheme="https://wrdan.com/categories/share/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>NameSilo注册 转入 续费域名后取消及退款方法</title>
-    <link href="https://wrdan.com/share/NameSilo-1.html"/>
-    <id>https://wrdan.com/share/NameSilo-1.html</id>
-    <published>2018-02-09T19:08:00.000Z</published>
-    <updated>2020-03-02T09:12:15.662Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;code&gt;NameSilo&lt;/code&gt;是一家国外很火的域名商，自带隐私保护，价格也便宜，支持支付宝/&lt;code&gt;PayPal&lt;/code&gt;等付款，首次注册和转入域名都可以使用优惠码便宜&lt;code&gt;1&lt;/code&gt;美元，优惠码&lt;code&gt;Namesilo_1&lt;/code&gt;。由于很多人误操作，可能需要取消/退款，这里就说下方法。&lt;/p&gt;
     
     </summary>
     
