@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://wrdan.com/"/>
-  <updated>2020-03-14T09:18:24.091Z</updated>
+  <updated>2020-03-14T10:56:22.126Z</updated>
   <id>https://wrdan.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://wrdan.com/share/hide-qq-report.html"/>
     <id>https://wrdan.com/share/hide-qq-report.html</id>
     <published>2020-03-14T06:50:50.000Z</published>
-    <updated>2020-03-14T09:18:24.091Z</updated>
+    <updated>2020-03-14T10:56:22.126Z</updated>
     
     <summary type="html">
     
@@ -31,7 +31,7 @@
         
           &lt;p&gt;相信很多站长都有一个困惑，自己好不容易搭建好的网站没几天域名就红了，不出所料，域名肯定是被某些人给举报了。&lt;/p&gt;
 &lt;p&gt;下面教大家一个方法可在QQ中隐藏右上角按钮。&lt;/p&gt;
-&lt;h4 id=&quot;方法：&quot;&gt;&lt;a href=&quot;#方法：&quot; class=&quot;headerlink&quot;
+&lt;h2 id=&quot;方法：&quot;&gt;&lt;a href=&quot;#方法：&quot; class=&quot;headerlink&quot;
         
       
     
@@ -46,11 +46,45 @@
   </entry>
   
   <entry>
+    <title>MIUI官方ROM仓库</title>
+    <link href="https://wrdan.com/share/miui-rom-down.html"/>
+    <id>https://wrdan.com/share/miui-rom-down.html</id>
+    <published>2020-03-13T05:50:50.000Z</published>
+    <updated>2020-03-14T09:29:47.248Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;img src=&quot;https://s1.ax1x.com/2020/03/14/8MhTII.png&quot; alt=&quot;MIUI官方ROM仓库&quot;&gt;&lt;/p&gt;
+&lt;p&gt;推荐一个MIUI固件下载网站：&lt;/p&gt;
+&lt;p&gt;MIUI官方ROM仓库 – 由米柚发烧友整理维护&lt;/p&gt;
+&lt;p&gt;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="share" scheme="https://wrdan.com/categories/share/"/>
+    
+    
+      <category term="MIUI" scheme="https://wrdan.com/tags/MIUI/"/>
+    
+      <category term="MIUI ROM" scheme="https://wrdan.com/tags/MIUI-ROM/"/>
+    
+      <category term="MIUI官方ROM" scheme="https://wrdan.com/tags/MIUI%E5%AE%98%E6%96%B9ROM/"/>
+    
+  </entry>
+  
+  <entry>
     <title>博客迁移到了 Hexo</title>
     <link href="https://wrdan.com/share/hexo.html"/>
     <id>https://wrdan.com/share/hexo.html</id>
     <published>2020-03-03T02:00:00.000Z</published>
-    <updated>2020-03-13T08:20:20.458Z</updated>
+    <updated>2020-03-14T12:29:37.554Z</updated>
     
     <summary type="html">
     
@@ -59,7 +93,7 @@
         
         
           &lt;p&gt;&lt;img src=&quot;https://ae01.alicdn.com/kf/Ha26cb3a6cbe74ec0b28908eaa7f0dd9eR.png&quot; alt=&quot;hexo+github&quot;&gt;&lt;/p&gt;
-&lt;h4 id=&quot;回归&quot;&gt;&lt;a href=&quot;#回归&quot;
+&lt;h2 id=&quot;回归&quot;&gt;&lt;a href=&quot;#回归&quot;
         
       
     
@@ -471,25 +505,6 @@
       <category term="爱奇艺万能播放器" scheme="https://wrdan.com/tags/%E7%88%B1%E5%A5%87%E8%89%BA%E4%B8%87%E8%83%BD%E6%92%AD%E6%94%BE%E5%99%A8/"/>
     
       <category term="百度网盘满速下载" scheme="https://wrdan.com/tags/%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E6%BB%A1%E9%80%9F%E4%B8%8B%E8%BD%BD/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>恭贺新年，万事如意，给大家拜年！</title>
-    <link href="https://wrdan.com/life/2018.html"/>
-    <id>https://wrdan.com/life/2018.html</id>
-    <published>2018-02-14T19:42:00.000Z</published>
-    <updated>2020-03-02T10:39:21.844Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;2018年2月15日（戊戌年），今天也就是大年三十儿，各位大兄弟们：祝大家新年快乐、身体健康、万事如意、心想事成！读书求学、在外工作、游走他乡，不管做什么；过年，一年也就这么一天，大家放下手头的事儿，陪伴下亲朋好友共度佳节吧!&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="life" scheme="https://wrdan.com/categories/life/"/>
-    
     
   </entry>
   
