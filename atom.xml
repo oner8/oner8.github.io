@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://wrdan.com/"/>
-  <updated>2020-03-13T08:20:20.458Z</updated>
+  <updated>2020-03-14T08:49:07.301Z</updated>
   <id>https://wrdan.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>最新隐藏QQ右上方举报按钮代码</title>
+    <link href="https://wrdan.com/share/hide-qq-report.html"/>
+    <id>https://wrdan.com/share/hide-qq-report.html</id>
+    <published>2020-03-14T06:50:50.000Z</published>
+    <updated>2020-03-14T08:49:07.301Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;相信很多站长都有一个困惑，自己好不容易搭建好的网站没几天域名就红了，不出所料，域名肯定是被某些人给举报了。&lt;/p&gt;
+&lt;p&gt;下面教大家一个方法可在QQ中隐藏右上角按钮。&lt;/p&gt;
+&lt;h4 id=&quot;方法：&quot;&gt;&lt;a href=&quot;#方法：&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="share" scheme="https://wrdan.com/categories/share/"/>
+    
+    
+      <category term="隐藏QQ举报" scheme="https://wrdan.com/tags/%E9%9A%90%E8%97%8FQQ%E4%B8%BE%E6%8A%A5/"/>
+    
+  </entry>
   
   <entry>
     <title>博客迁移到了 Hexo</title>
@@ -460,25 +489,6 @@
     
     
       <category term="life" scheme="https://wrdan.com/categories/life/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>又一款高速下载百度云文件的神器：SpeedKoalaBD v6 0 4破解版</title>
-    <link href="https://wrdan.com/share/SpeedKoalaBD.html"/>
-    <id>https://wrdan.com/share/SpeedKoalaBD.html</id>
-    <published>2018-02-11T19:56:00.000Z</published>
-    <updated>2020-03-02T09:12:15.537Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;分享一个百度云文件的方法,&lt;code&gt;SpeedKoalaBD&lt;/code&gt;，好像是使用&lt;code&gt;Aria2&lt;/code&gt;下载，亲测可以满速。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="share" scheme="https://wrdan.com/categories/share/"/>
     
     
   </entry>
