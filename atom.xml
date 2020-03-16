@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://wrdan.com/"/>
-  <updated>2020-03-14T13:36:43.469Z</updated>
+  <updated>2020-03-16T08:47:15.232Z</updated>
   <id>https://wrdan.com/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Github+jsDelivr 为前端文件加速的全球CDN</title>
+    <link href="https://wrdan.com/share/jsDelivr-cdn.html"/>
+    <id>https://wrdan.com/share/jsDelivr-cdn.html</id>
+    <published>2020-03-16T08:35:50.000Z</published>
+    <updated>2020-03-16T08:47:15.232Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;img src=&quot;https://pic.rmb.bdstatic.com/a569977c2e7b68159a7921592f14a5a7.png&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="share" scheme="https://wrdan.com/categories/share/"/>
+    
+    
+      <category term="cdn" scheme="https://wrdan.com/tags/cdn/"/>
+    
+      <category term="jsDelivr CDN加速" scheme="https://wrdan.com/tags/jsDelivr-CDN%E5%8A%A0%E9%80%9F/"/>
+    
+      <category term="静态文件CDN加速" scheme="https://wrdan.com/tags/%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6CDN%E5%8A%A0%E9%80%9F/"/>
+    
+  </entry>
   
   <entry>
     <title>最新隐藏QQ右上方举报按钮代码</title>
@@ -478,30 +509,6 @@
       <category term="西游记女儿国" scheme="https://wrdan.com/tags/%E8%A5%BF%E6%B8%B8%E8%AE%B0%E5%A5%B3%E5%84%BF%E5%9B%BD/"/>
     
       <category term="祖宗十九代" scheme="https://wrdan.com/tags/%E7%A5%96%E5%AE%97%E5%8D%81%E4%B9%9D%E4%BB%A3/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>爱奇艺万能播放器：免费不限速下载百度网盘文件新方法已测</title>
-    <link href="https://wrdan.com/share/GeePlayer.html"/>
-    <id>https://wrdan.com/share/GeePlayer.html</id>
-    <published>2018-02-22T18:44:00.000Z</published>
-    <updated>2020-03-02T09:12:08.897Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;爱奇艺万能播放器：免费不限速下载百度网盘文件新方法已测&lt;/p&gt;
-&lt;p&gt;这个软件是昨天爆出来的，不得不说网上人才真的多，这TM也能发现的了，实测可以满速 ~&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="share" scheme="https://wrdan.com/categories/share/"/>
-    
-    
-      <category term="爱奇艺万能播放器" scheme="https://wrdan.com/tags/%E7%88%B1%E5%A5%87%E8%89%BA%E4%B8%87%E8%83%BD%E6%92%AD%E6%94%BE%E5%99%A8/"/>
-    
-      <category term="百度网盘满速下载" scheme="https://wrdan.com/tags/%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E6%BB%A1%E9%80%9F%E4%B8%8B%E8%BD%BD/"/>
     
   </entry>
   
